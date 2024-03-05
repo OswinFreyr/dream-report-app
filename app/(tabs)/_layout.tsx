@@ -48,21 +48,21 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name="Astuces"
+        name="astuces"
         options={{
           title: 'Astuces',
           tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
         }}
       />
       <Tabs.Screen
-        name="Historique"
+        name="history"
         options={{
           title: 'Historique',
           tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
         }}
         />
         <Tabs.Screen
-        name="Paramètres"
+        name="parameters"
         options={{
           title: 'Paramètres',
           tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
