@@ -3,6 +3,7 @@ import { View, StyleSheet, Dimensions } from "react-native";
 import { TextInput, Button, Checkbox } from "react-native-paper";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import TitleInput from "@/components/TitleInput";
+import SwitchButton from "@/components/SwitchButton";
 
 const { width } = Dimensions.get("window");
 
@@ -48,11 +49,12 @@ export default function DreamForm() {
             style={[styles.input, { width: width * 0.8, alignSelf: "center" }]}
         />
         <View style={styles.checkboxContainer}>
-            <Checkbox.Item
+            {/* <Checkbox.Item
                 label="Rêve Lucide"
                 status={isLucidDream ? "checked" : "unchecked"}
                 onPress={() => setIsLucidDream(!isLucidDream)}
-            />
+            /> */}
+            <SwitchButton/>
         </View>
         <Button
             mode="contained"
