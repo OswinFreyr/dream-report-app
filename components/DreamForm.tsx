@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { View, StyleSheet, Dimensions } from "react-native";
 import { TextInput, Button, Checkbox } from "react-native-paper";
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import TitleInput from "@/components/TitleInput";
 
 const { width } = Dimensions.get("window");
 
@@ -36,6 +37,7 @@ export default function DreamForm() {
 
     return (
     <View style={styles.container}>
+        <TitleInput/>
         <TextInput
             label="Rêve"
             value={dreamText}
