@@ -6,7 +6,7 @@ const TitleInput = () => {
 
   return (
     <TextInput
-      label="Email"
+      label="Rentrez un titre à votre titre"
       value={text}
       onChangeText={text => setText(text)}
     />
