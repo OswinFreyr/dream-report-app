@@ -7,8 +7,8 @@ export default function DreamAnalysis() {
     try {
       const apiUrl = "https://api.meaningcloud.com/topics-2.0";
       const language = "fr";
-      const tmpDream = "Mon texte ici";
-      const apiKey = "ma_cle_api_ici";
+      const tmpDream = "Un truc important s'est passé avec gérard";
+      const apiKey = "bcd1ea9fc7ab51e2bc69736e28d91941";
       const formdata = new FormData();
       formdata.append("key", apiKey);
       formdata.append("txt", tmpDream);
