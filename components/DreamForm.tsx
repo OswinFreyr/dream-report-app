@@ -61,7 +61,7 @@ export default function DreamForm() {
             /> */}
         <SwitchButton />
         <SingleDatePicker />
-        <ChipChoice />
+        <ChipChoice content="Joie" />
       </View>
       <Button
         mode="contained"

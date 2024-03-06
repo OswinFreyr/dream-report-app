@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { Chip } from 'react-native-paper';
 
-const ChipChoice = () => (
-  <Chip icon="information" onPress={() => console.log('Pressed')}>Example Chip</Chip>
+const ChipChoice = ({content}) => (
+  <Chip icon="information" onPress={() => console.log('Pressed')}>{content}</Chip>
 );
 
 export default ChipChoice;
