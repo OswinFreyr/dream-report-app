@@ -6,7 +6,7 @@ const SwitchButton = () => {
 
   const onToggleSwitch = () => setIsSwitchOn(!isSwitchOn);
 
-  return <Switch value={isSwitchOn} onValueChange={onToggleSwitch} />;
+  return <Switch value={isSwitchOn} onValueChange={onToggleSwitch}  />;
 };
 
 export default SwitchButton;

@@ -11,7 +11,11 @@ import ChipChoice from "@/components/ChipChoice";
 
 const { width } = Dimensions.get("window");
 
-export default function DreamForm() {
+export default async function DreamForm() {
+  const response = await fetch("../datas/People.json");
+  const peopleData = await response.json();
+  const people = await peopleData.map((e) => e.name);
+
   const [dreamText, setDreamText] = useState("");
   const [isLucidDream, setIsLucidDream] = useState(false);
   const handleResetDreams = async () => {};
@@ -61,6 +65,10 @@ export default function DreamForm() {
             /> */}
         <SwitchButton />
         <SingleDatePicker />
+
+        {people.map((name, index) => (
+          <ChipChoice key={index} content={name} />
+        ))}
         <ChipChoice content="Joie" />
       </View>
       <Button

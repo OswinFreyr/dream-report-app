@@ -1,4 +1,4 @@
-[
+{ "People" : [
     {
         "name" : "Pierre Palmade"
     },
@@ -14,4 +14,4 @@
     {
         "name" : "Feldawp du Brazil"
     }
-]
+]}
