@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Text, Button } from "react-native";
+import { View, Text, Button, StyleSheet } from "react-native";
 
 export default function DreamAnalysis() {
   const [apiResponse, setApiResponse] = useState(null);
@@ -81,7 +81,7 @@ export default function DreamAnalysis() {
   );
 }
 
-const styles = {
+const styles = StyleSheet.create( {
   tableHeader: {
     flex: 1,
     fontWeight: "bold",
@@ -91,4 +91,4 @@ const styles = {
     flex: 1,
     marginRight: 5,
   },
-};
+});
