@@ -4,6 +4,9 @@ import { TextInput, Button, Checkbox } from "react-native-paper";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import TitleInput from "@/components/TitleInput";
 import SwitchButton from "@/components/SwitchButton";
+import { fr, registerTranslation } from 'react-native-paper-dates'
+registerTranslation('fr', fr);
+import SingleDatePicker from '@/components/SingleDatePicker';
 
 const { width } = Dimensions.get("window");
 
@@ -55,6 +58,7 @@ export default function DreamForm() {
                 onPress={() => setIsLucidDream(!isLucidDream)}
             /> */}
             <SwitchButton/>
+            <SingleDatePicker/>
         </View>
         <Button
             mode="contained"
