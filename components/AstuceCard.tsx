@@ -13,7 +13,9 @@ const AstuceCard =  ({astuce}) => (
       <Text variant="bodyMedium">{astuce.content}</Text>
     </Card.Content>
     <Card.Actions>
-      <Pressable>Voir plus</Pressable>
+      <Pressable>
+        <Text>Voir plus</Text>
+      </Pressable>
     </Card.Actions>
   </Card>
 );

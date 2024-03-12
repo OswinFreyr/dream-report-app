@@ -1,35 +1,42 @@
 import { StyleSheet } from 'react-native';
+import { useIsFocused } from '@react-navigation/native';
 import { Text, View } from '@/components/Themed';
 import AstuceCard from '@/components/AstuceCard';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 export default function TabAstuces() {
-
     const [title, setTitle] = useState("");
     const [content, setContent] = useState("");
 
-    const getAstucesData = async () => {
-
-        const astucesResponse = await fetch("../datas/Astuces.json");
-
-        const astucesDatas = await astucesResponse.json();
-
-        let rand = Math.random() * (await astucesDatas.astuces).length;
-
-        rand = Math.trunc(rand);
-
-        setTitle(astucesDatas.astuces[rand].title);
-        setContent(astucesDatas.astuces[rand].content);
+    let ignore = false
+    const isFocused = useIsFocused();
+    if(!isFocused){
+        ignore = false;
     }
-    
 
-    getAstucesData();
+    useEffect(() => {
+        const getAstucesData = async () => {
+            const astucesResponse = await fetch("../datas/Astuces.json");
+            const astucesDatas = await astucesResponse.json();
+    
+            let rand = Math.random() * (await astucesDatas.astuces).length;
+            rand = Math.trunc(rand);
+    
+            setTitle(astucesDatas.astuces[rand].title);
+            setContent(astucesDatas.astuces[rand].content);
+        }
+        if(!ignore) {
+            getAstucesData()
+        }
+        return () => {
+                ignore = true;
+    }});
 
     return (
         <View style={styles.container}>
-            <Text style={styles.title}>Astuce du jour</Text>
+            <Text style={styles.title}>Une astuce aléatoire</Text>
             <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-            <AstuceCard astuce={{title: title, content: content}} />
+            <AstuceCard astuce={{title: title, content: content} ?? {title: "Loading title", content: "Loading content"}} />
         </View>
     );
 }
