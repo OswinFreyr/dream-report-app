@@ -26,6 +26,7 @@ export default function SingleDatePicker() {
         <Button onPress={() => setOpen(true)} uppercase={false} mode="outlined">
           Pick single date
         </Button>
+        {date && <Text> {date.toDateString()}</Text>}
         <DatePickerModal
           locale="fr"
           mode="single"
