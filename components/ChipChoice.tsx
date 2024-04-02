@@ -3,9 +3,9 @@ import { Chip } from 'react-native-paper';
 
 
 
-const ChipChoice = ({content}) => (
+const ChipChoice = ({content, tabInfos}) => (
   <Chip icon="information" onPress={() => {
-    console.log('Pressed')
+    tabInfos.push(content)
   }}>{content}</Chip>
 );
 
