@@ -1,16 +1,7 @@
 import { useState, useEffect } from "react";
-import {
-  View,
-  StyleSheet,
-  Dimensions,
-  ScrollView,
-  KeyboardAvoidingView,
-  Platform,
-} from "react-native";
+import { View, StyleSheet, Dimensions, ScrollView, KeyboardAvoidingView, Platform, } from "react-native";
 import { TextInput, Button, Switch, Text } from "react-native-paper";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import TitleInput from "@/components/TitleInput";
-import { fr, registerTranslation } from "react-native-paper-dates";
 import SingleDatePicker from "@/components/SingleDatePicker";
 import ChipChoice from "@/components/ChipChoice";
 import { People } from "@/datas/People";
@@ -20,8 +11,10 @@ import { Themes } from "@/datas/Themes";
 const { width } = Dimensions.get("window");
 
 export default function DreamForm() {
+  const [dreamTitle, setDreamTitle] = useState("");
   const [dreamText, setDreamText] = useState("");
   const [isLucidDream, setIsLucidDream] = useState(false);
+  const [date, setDate] = useState(undefined);
   const [people, setPeople] = useState([]);
   const [feelings, setFeelings] = useState([]);
   const [themes, setThemes] = useState([]);
@@ -51,7 +44,7 @@ export default function DreamForm() {
     try {
       const existingData = await AsyncStorage.getItem("dreamFormDataArray");
       const formDataArray = existingData ? JSON.parse(existingData) : [];
-      formDataArray.push({ dreamText, isLucidDream, tabInfos });
+      formDataArray.push({ dreamTitle, dreamText, date, isLucidDream, tabInfos });
       await AsyncStorage.setItem(
         "dreamFormDataArray",
         JSON.stringify(formDataArray)
@@ -64,8 +57,10 @@ export default function DreamForm() {
       console.error("Error saving data:", error);
     }
 
+    setDreamTitle("");
     setDreamText("");
     setIsLucidDream(false);
+    setDate(undefined)
     setTabInfos([]);
   };
 
@@ -78,7 +73,11 @@ export default function DreamForm() {
         contentContainerStyle={styles.container}
         keyboardShouldPersistTaps="handled"
       >
-        <TitleInput />
+        <TextInput
+          label="Rentrez un titre à votre rêve"
+          value={dreamTitle}
+          onChangeText={text => setDreamTitle(text)}
+        />
         <TextInput
           label="Rêve"
           value={dreamText}
@@ -91,7 +90,7 @@ export default function DreamForm() {
         <View style={styles.checkboxContainer}>
           <Switch value={isLucidDream} onValueChange={onToggleSwitch} />
           <Text style={{ color: "black" }}>Rêve Lucide</Text>
-          <SingleDatePicker />
+          <SingleDatePicker date={date} />
         </View>
         <Text style={{ color: "black" }}>Personnes</Text>
         <View style={styles.choicesContainer}>
