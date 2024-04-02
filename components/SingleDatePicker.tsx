@@ -3,6 +3,7 @@ import { View, Text } from "react-native";
 import { Button } from "react-native-paper";
 import { DatePickerModal } from "react-native-paper-dates";
 import { SafeAreaProvider } from "react-native-safe-area-context";
+import fr from "react-native-paper-dates/src/translations/fr";
 
 export default function SingleDatePicker() {
   const [date, setDate] = React.useState(undefined);
