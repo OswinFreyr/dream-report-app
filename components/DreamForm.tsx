@@ -21,6 +21,7 @@ import { Themes } from "@/datas/Themes";
 const { width } = Dimensions.get("window");
 
 export default function DreamForm() {
+  const [dreamTitle, setDreamTitle] = useState("");
   const [dreamText, setDreamText] = useState("");
   const [isLucidDream, setIsLucidDream] = useState(false);
   const [people, setPeople] = useState([]);
@@ -44,7 +45,7 @@ export default function DreamForm() {
       setThemes(themesInfo)
     }
     getThemesData()
-    
+
   }, []);
 
   const onToggleSwitch = () => setIsLucidDream(!isLucidDream);
@@ -53,7 +54,7 @@ export default function DreamForm() {
     try {
       const existingData = await AsyncStorage.getItem("dreamFormDataArray");
       const formDataArray = existingData ? JSON.parse(existingData) : [];
-      formDataArray.push({ dreamText, isLucidDream, tabInfos });
+      formDataArray.push({ dreamTitle, dreamText, isLucidDream, tabInfos });
       await AsyncStorage.setItem(
         "dreamFormDataArray",
         JSON.stringify(formDataArray)
@@ -80,7 +81,11 @@ export default function DreamForm() {
         contentContainerStyle={styles.container}
         keyboardShouldPersistTaps="handled"
       >
-        <TitleInput />
+        <TextInput
+          label="Rentrez un titre à votre rêve"
+          value={dreamTitle}
+          onChangeText={text => setDreamTitle(text)}
+        />
         <TextInput
           label="Rêve"
           value={dreamText}

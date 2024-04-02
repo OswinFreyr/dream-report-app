@@ -4,7 +4,7 @@ import { Text, View } from '@/components/Themed';
 export default function TabParameters() {
     return (
         <View style={styles.container}>
-            <Text style={styles.title}>paramètres</Text>
+            <Text style={styles.title}>Paramètres</Text>
             <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
         </View>
     );
