@@ -14,7 +14,7 @@ const { width } = Dimensions.get("window");
 export default async function DreamForm() {
   const response = await fetch("../datas/People.json");
   const peopleData = await response.json();
-  const people = await peopleData.map((e) => e.name);
+  const people = await peopleData.map(el => el.name);
 
   const [dreamText, setDreamText] = useState("");
   const [isLucidDream, setIsLucidDream] = useState(false);
@@ -63,6 +63,7 @@ export default async function DreamForm() {
                 status={isLucidDream ? "checked" : "unchecked"}
                 onPress={() => setIsLucidDream(!isLucidDream)}
             /> */}
+            <p>Reve lucide</p>
         <SwitchButton />
         <SingleDatePicker />
 

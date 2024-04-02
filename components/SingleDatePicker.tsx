@@ -27,7 +27,7 @@ export default function SingleDatePicker() {
           Pick single date
         </Button>
         <DatePickerModal
-          locale="en"
+          locale="fr"
           mode="single"
           visible={open}
           onDismiss={onDismissSingle}
