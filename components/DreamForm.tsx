@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import { View, StyleSheet, Dimensions } from "react-native";
 import { TextInput, Button, Checkbox } from "react-native-paper";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -8,16 +7,30 @@ import { fr, registerTranslation } from "react-native-paper-dates";
 registerTranslation("fr", fr);
 import SingleDatePicker from "@/components/SingleDatePicker";
 import ChipChoice from "@/components/ChipChoice";
+import { useState, useEffect } from 'react';
 
 const { width } = Dimensions.get("window");
 
-export default async function DreamForm() {
-  const response = await fetch("../datas/People.json");
-  const peopleData = await response.json();
-  const people = await peopleData.map((e) => e.name);
+export default function DreamForm() {
 
   const [dreamText, setDreamText] = useState("");
   const [isLucidDream, setIsLucidDream] = useState(false);
+
+  const [people, setPeople] = useState([]);
+  const [content, setContent] = useState("");
+
+  useEffect(() => {
+    const getPeopleData = async () => {
+        const response = await fetch("../datas/People.json");
+        const peopleData = await response.json();
+
+        setPeople(peopleData.map((e) => e.name))
+    }
+    getPeopleData()
+
+  });
+  
+  
   const handleResetDreams = async () => {};
   const handleDreamSubmission = async () => {
     // Logique de traitement de la soumission du rêve
