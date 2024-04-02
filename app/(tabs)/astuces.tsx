@@ -19,11 +19,11 @@ export default function TabAstuces() {
             const astucesResponse = await fetch("../datas/Astuces.json");
             const astucesDatas = await astucesResponse.json();
     
-            let rand = Math.random() * (await astucesDatas.astuces).length;
+            let rand = Math.random() * (await astucesDatas.Astuces).length;
             rand = Math.trunc(rand);
     
-            setTitle(astucesDatas.astuces[rand].title);
-            setContent(astucesDatas.astuces[rand].content);
+            setTitle(astucesDatas.Astuces[rand].title);
+            setContent(astucesDatas.Astuces[rand].content);
         }
         if(!ignore) {
             getAstucesData()

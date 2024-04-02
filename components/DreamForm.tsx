@@ -12,15 +12,14 @@ const { width } = Dimensions.get("window");
 
 export default function DreamForm() {
 
-  const [isSwitchOn, setIsSwitchOn] = useState(false);
-
-
   const [dreamText, setDreamText] = useState("");
   const [isLucidDream, setIsLucidDream] = useState(false);
 
   const [people, setPeople] = useState([]);
   const [feelings, setFeelings] = useState([]);
   const [themes, setThemes] = useState([]);
+
+  const [tabInfos, setTabInfos] = useState([]);
 
 
   useEffect(() => {
@@ -53,7 +52,7 @@ export default function DreamForm() {
 
   }, []);
   
-  const onToggleSwitch = () => setIsSwitchOn(!isSwitchOn);
+  const onToggleSwitch = () => {setIsLucidDream(!isLucidDream)};
 
   
   const handleResetDreams = async () => {};
@@ -65,7 +64,7 @@ export default function DreamForm() {
       const existingData = await AsyncStorage.getItem("dreamFormDataArray");
       const formDataArray = existingData ? JSON.parse(existingData) : [];
       // Ajouter le nouveau formulaire au tableau
-      formDataArray.push({ dreamText, isLucidDream });
+      formDataArray.push({ dreamText, isLucidDream, tabInfos });
       // Sauvegarder le tableau mis à jour dans AsyncStorage
       await AsyncStorage.setItem(
         "dreamFormDataArray",
@@ -81,6 +80,7 @@ export default function DreamForm() {
     // Réinitialisation du formulaire
     setDreamText("");
     setIsLucidDream(false);
+    setTabInfos([])
   };
 
   return (
@@ -96,28 +96,29 @@ export default function DreamForm() {
         style={[styles.input, { width: width * 0.8, alignSelf: "center" }]}
       />
       <View style={styles.checkboxContainer}>
-        <Checkbox.Item
+        {/* <Checkbox.Item
                 label="Rêve Lucide"
                 status={isLucidDream ? "checked" : "unchecked"}
                 onPress={() => setIsLucidDream(!isLucidDream)}
-            />
-        <Switch value={isSwitchOn} onValueChange={onToggleSwitch} />
+            /> */}
+        <Switch value={isLucidDream} onValueChange={onToggleSwitch} />
+        <p>Rêve Lucide</p>
         <SingleDatePicker />
         
       </View>
       <View style={styles.choicesContainer}>
         {people.map((name, index) => (
-          <ChipChoice key={index} content={name} />
+          <ChipChoice key={index} content={name} tabInfos={tabInfos} />
         ))}
       </View>
       <View style={styles.choicesContainer}>
         {themes.map((name, index) => (
-          <ChipChoice key={index} content={name} />
+          <ChipChoice key={index} content={name} tabInfos={tabInfos} />
         ))}
       </View>
       <View style={styles.choicesContainer}>
         {feelings.map((name, index) => (
-          <ChipChoice key={index} content={name} />
+          <ChipChoice key={index} content={name} tabInfos={tabInfos} />
         ))}
       </View>
       <Button
