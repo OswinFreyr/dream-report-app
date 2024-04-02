@@ -52,11 +52,7 @@ export default function DreamForm() {
 
   }, []);
   
-  const onToggleSwitch = () => {
-    setIsLucidDream(!isLucidDream)
-    console.log(tab);
-    
-  };
+  const onToggleSwitch = () => {setIsLucidDream(!isLucidDream)};
 
   
   const handleResetDreams = async () => {};
@@ -84,6 +80,7 @@ export default function DreamForm() {
     // Réinitialisation du formulaire
     setDreamText("");
     setIsLucidDream(false);
+    setTabInfos([])
   };
 
   return (
