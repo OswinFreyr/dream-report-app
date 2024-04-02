@@ -149,6 +149,5 @@ const styles = StyleSheet.create({
     flexWrap: "wrap",
     alignItems: "center",
     marginBottom: 16,
-    // justifyContent: "space-around",
   },
 });
