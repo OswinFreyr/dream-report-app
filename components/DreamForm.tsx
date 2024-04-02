@@ -1,8 +1,7 @@
 import { View, StyleSheet, Dimensions } from "react-native";
-import { TextInput, Button, Checkbox } from "react-native-paper";
+import { TextInput, Button, Checkbox, Switch } from "react-native-paper";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import TitleInput from "@/components/TitleInput";
-import SwitchButton from "@/components/SwitchButton";
 import { fr, registerTranslation } from "react-native-paper-dates";
 registerTranslation("fr", fr);
 import SingleDatePicker from "@/components/SingleDatePicker";
@@ -13,23 +12,49 @@ const { width } = Dimensions.get("window");
 
 export default function DreamForm() {
 
+  const [isSwitchOn, setIsSwitchOn] = useState(false);
+
+
   const [dreamText, setDreamText] = useState("");
   const [isLucidDream, setIsLucidDream] = useState(false);
 
   const [people, setPeople] = useState([]);
-  const [content, setContent] = useState("");
+  const [feelings, setFeelings] = useState([]);
+  const [themes, setThemes] = useState([]);
+
 
   useEffect(() => {
     const getPeopleData = async () => {
         const response = await fetch("../datas/People.json");
         const peopleData = await response.json();
+        const peopleInfo = await peopleData.People.map((e) => e.name)
 
-        setPeople(peopleData.map((e) => e.name))
+        setPeople(peopleInfo)
     }
     getPeopleData()
+    const getFeelingsData = async () => {
+      const response = await fetch("../datas/Feelings.json");
+      const feelingsData = await response.json();
+      const feelingsInfo = await feelingsData.Feelings.map((e) => e.name)
 
-  });
+      setFeelings(feelingsInfo)
+    }
+    getFeelingsData()
+    const getThemesData = async () => {
+      const response = await fetch("../datas/themes.json");
+      const themesData = await response.json();
+      console.log(themesData);
+      
+      const themesInfo = await themesData.Themes.map((e) => e.name)
+
+      setThemes(themesInfo)
+    }
+    getThemesData()
+
+  }, []);
   
+  const onToggleSwitch = () => setIsSwitchOn(!isSwitchOn);
+
   
   const handleResetDreams = async () => {};
   const handleDreamSubmission = async () => {
@@ -71,18 +96,29 @@ export default function DreamForm() {
         style={[styles.input, { width: width * 0.8, alignSelf: "center" }]}
       />
       <View style={styles.checkboxContainer}>
-        {/* <Checkbox.Item
+        <Checkbox.Item
                 label="Rêve Lucide"
                 status={isLucidDream ? "checked" : "unchecked"}
                 onPress={() => setIsLucidDream(!isLucidDream)}
-            /> */}
-        <SwitchButton />
+            />
+        <Switch value={isSwitchOn} onValueChange={onToggleSwitch} />
         <SingleDatePicker />
-
+        
+      </View>
+      <View style={styles.choicesContainer}>
         {people.map((name, index) => (
           <ChipChoice key={index} content={name} />
         ))}
-        <ChipChoice content="Joie" />
+      </View>
+      <View style={styles.choicesContainer}>
+        {themes.map((name, index) => (
+          <ChipChoice key={index} content={name} />
+        ))}
+      </View>
+      <View style={styles.choicesContainer}>
+        {feelings.map((name, index) => (
+          <ChipChoice key={index} content={name} />
+        ))}
       </View>
       <Button
         mode="contained"
@@ -117,4 +153,9 @@ const styles = StyleSheet.create({
   button: {
     marginTop: 8,
   },
+  choicesContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginBottom: 16,
+  }
 });
