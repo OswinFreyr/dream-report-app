@@ -1,16 +1,7 @@
 import { useState, useEffect } from "react";
-import {
-  View,
-  StyleSheet,
-  Dimensions,
-  ScrollView,
-  KeyboardAvoidingView,
-  Platform,
-} from "react-native";
+import { View, StyleSheet, Dimensions, ScrollView, KeyboardAvoidingView, Platform, } from "react-native";
 import { TextInput, Button, Switch, Text } from "react-native-paper";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import TitleInput from "@/components/TitleInput";
-import { fr, registerTranslation } from "react-native-paper-dates";
 import SingleDatePicker from "@/components/SingleDatePicker";
 import ChipChoice from "@/components/ChipChoice";
 import { People } from "@/datas/People";
