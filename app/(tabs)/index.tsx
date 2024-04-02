@@ -5,26 +5,6 @@ import { Text, View } from '@/components/Themed';
 import  DreamForm  from '@/components/DreamForm';
 
 export default function TabOneScreen() {
-  const getPermissions = async () => {
-    let permissions = [
-      PermissionsAndroid.PERMISSIONS.READ_EXTERNAL_STORAGE,
-      PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE,
-    ]    
-    
-    let status = await PermissionsAndroid.requestMultiple(permissions)
-    
-    if (status = PermissionsAndroid.RESULTS.GRANTED){
-        // granted
-        console.log("coucou");
-        
-    }else{
-       // Not granted
-       console.log("pas coucou");
-       
-    }
-  }
-  getPermissions()
-
 
   return (
     <View style={styles.container}>

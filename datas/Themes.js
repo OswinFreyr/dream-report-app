@@ -1,4 +1,4 @@
-{"Themes" : [
+export const Themes = [
     {
         "name" : "Etudes"
     },
@@ -11,4 +11,4 @@
     {
         "name" : "Famille"
     }
-]}
+];

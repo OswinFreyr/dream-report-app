@@ -7,6 +7,10 @@ registerTranslation("fr", fr);
 import SingleDatePicker from "@/components/SingleDatePicker";
 import ChipChoice from "@/components/ChipChoice";
 import { useState, useEffect } from 'react';
+import { People } from "@/datas/People";
+import { Feelings } from "@/datas/Feelings";
+import { Themes } from "@/datas/Themes";
+
 
 const { width } = Dimensions.get("window");
 
@@ -24,27 +28,18 @@ export default function DreamForm() {
 
   useEffect(() => {
     const getPeopleData = async () => {
-        const response = await fetch("../datas/People.json");
-        const peopleData = await response.json();
-        const peopleInfo = await peopleData.People.map((e) => e.name)
-
+        const peopleInfo = People.map((e) => e.name)
         setPeople(peopleInfo)
     }
     getPeopleData()
     const getFeelingsData = async () => {
-      const response = await fetch("../datas/Feelings.json");
-      const feelingsData = await response.json();
-      const feelingsInfo = await feelingsData.Feelings.map((e) => e.name)
+      const feelingsInfo = Feelings.map((e) => e.name)
 
       setFeelings(feelingsInfo)
     }
     getFeelingsData()
     const getThemesData = async () => {
-      const response = await fetch("../datas/themes.json");
-      const themesData = await response.json();
-      console.log(themesData);
-      
-      const themesInfo = await themesData.Themes.map((e) => e.name)
+      const themesInfo = Themes.map((e) => e.name)
 
       setThemes(themesInfo)
     }

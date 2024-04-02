@@ -3,6 +3,7 @@ import { useIsFocused } from '@react-navigation/native';
 import { Text, View } from '@/components/Themed';
 import AstuceCard from '@/components/AstuceCard';
 import { useState, useEffect } from 'react';
+import { Astuces } from "@/datas/Astuces";
 
 export default function TabAstuces() {
     const [title, setTitle] = useState("");
@@ -15,15 +16,12 @@ export default function TabAstuces() {
     }
 
     useEffect(() => {
-        const getAstucesData = async () => {
-            const astucesResponse = await fetch("../datas/Astuces.json");
-            const astucesDatas = await astucesResponse.json();
-    
-            let rand = Math.random() * (await astucesDatas.Astuces).length;
+        const getAstucesData = async () => {    
+            let rand = Math.random() * Astuces.length;
             rand = Math.trunc(rand);
     
-            setTitle(astucesDatas.Astuces[rand].title);
-            setContent(astucesDatas.Astuces[rand].content);
+            setTitle(Astuces[rand].title);
+            setContent(Astuces[rand].content);
         }
         if(!ignore) {
             getAstucesData()
