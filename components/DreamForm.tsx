@@ -17,7 +17,6 @@ import { People } from "@/datas/People";
 import { Feelings } from "@/datas/Feelings";
 import { Themes } from "@/datas/Themes";
 
-
 const { width } = Dimensions.get("window");
 
 export default function DreamForm() {
@@ -31,21 +30,20 @@ export default function DreamForm() {
 
   useEffect(() => {
     const getPeopleData = async () => {
-        const peopleInfo = People.map((e) => e.name)
-        setPeople(peopleInfo)
-    }
-    getPeopleData()
+      const peopleInfo = People.map((e) => e.name);
+      setPeople(peopleInfo);
+    };
+    getPeopleData();
     const getFeelingsData = async () => {
-      const feelingsInfo = Feelings.map((e) => e.name)
-      setFeelings(feelingsInfo)
-    }
-    getFeelingsData()
+      const feelingsInfo = Feelings.map((e) => e.name);
+      setFeelings(feelingsInfo);
+    };
+    getFeelingsData();
     const getThemesData = async () => {
-      const themesInfo = Themes.map((e) => e.name)
-      setThemes(themesInfo)
-    }
-    getThemesData()
-
+      const themesInfo = Themes.map((e) => e.name);
+      setThemes(themesInfo);
+    };
+    getThemesData();
   }, []);
 
   const onToggleSwitch = () => setIsLucidDream(!isLucidDream);
@@ -97,22 +95,22 @@ export default function DreamForm() {
         />
         <View style={styles.checkboxContainer}>
           <Switch value={isLucidDream} onValueChange={onToggleSwitch} />
-          <Text>Rêve Lucide</Text>
+          <Text style={{ color: "black" }}>Rêve Lucide</Text>
           <SingleDatePicker />
         </View>
-        <Text>Personnes</Text>
+        <Text style={{ color: "black" }}>Personnes</Text>
         <View style={styles.choicesContainer}>
           {people.map((name, index) => (
             <ChipChoice key={index} content={name} tabInfos={tabInfos} />
           ))}
         </View>
-        <Text>Thématiques</Text>
+        <Text style={{ color: "black" }}>Thématiques</Text>
         <View style={styles.choicesContainer}>
           {themes.map((name, index) => (
             <ChipChoice key={index} content={name} tabInfos={tabInfos} />
           ))}
         </View>
-        <Text>Émotions</Text>
+        <Text style={{ color: "black" }}>Émotions</Text>
         <View style={styles.choicesContainer}>
           {feelings.map((name, index) => (
             <ChipChoice key={index} content={name} tabInfos={tabInfos} />
