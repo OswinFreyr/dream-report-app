@@ -24,6 +24,7 @@ const ChipChoice = ({ content, tabInfos }) => {
       style={{
         backgroundColor: isPressed ? "#b9b686" : "#d6d162",
         marginRight: 5,
+        marginTop: 5,
       }}
       textStyle={{ color: isPressed ? "gray" : "white" }}
     >
