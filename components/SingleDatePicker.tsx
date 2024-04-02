@@ -1,23 +1,22 @@
-import React from "react";
+import { useState, useCallback } from "react";
 import { View, Text } from "react-native";
 import { Button } from "react-native-paper";
 import { DatePickerModal } from "react-native-paper-dates";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 
-export default function SingleDatePicker() {
-  const [date, setDate] = React.useState(undefined);
-  const [open, setOpen] = React.useState(false);
+export default function SingleDatePicker({date}) {
+  const [open, setOpen] = useState(false);
 
-  const onDismissSingle = React.useCallback(() => {
+  const onDismissSingle = useCallback(() => {
     setOpen(false);
   }, [setOpen]);
 
-  const onConfirmSingle = React.useCallback(
+  const onConfirmSingle = useCallback(
     (params) => {
       setOpen(false);
-      setDate(params.date);
+      date = params.date;
     },
-    [setOpen, setDate]
+    [setOpen]
   );
 
   return (

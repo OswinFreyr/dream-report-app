@@ -23,6 +23,7 @@ export default function DreamForm() {
   const [dreamTitle, setDreamTitle] = useState("");
   const [dreamText, setDreamText] = useState("");
   const [isLucidDream, setIsLucidDream] = useState(false);
+  const [date, setDate] = useState(undefined);
   const [people, setPeople] = useState([]);
   const [feelings, setFeelings] = useState([]);
   const [themes, setThemes] = useState([]);
@@ -52,7 +53,7 @@ export default function DreamForm() {
     try {
       const existingData = await AsyncStorage.getItem("dreamFormDataArray");
       const formDataArray = existingData ? JSON.parse(existingData) : [];
-      formDataArray.push({ dreamTitle, dreamText, isLucidDream, tabInfos });
+      formDataArray.push({ dreamTitle, dreamText, date, isLucidDream, tabInfos });
       await AsyncStorage.setItem(
         "dreamFormDataArray",
         JSON.stringify(formDataArray)
@@ -65,8 +66,10 @@ export default function DreamForm() {
       console.error("Error saving data:", error);
     }
 
+    setDreamTitle("");
     setDreamText("");
     setIsLucidDream(false);
+    setDate(undefined)
     setTabInfos([]);
   };
 
@@ -96,7 +99,7 @@ export default function DreamForm() {
         <View style={styles.checkboxContainer}>
           <Switch value={isLucidDream} onValueChange={onToggleSwitch} />
           <Text style={{ color: "black" }}>Rêve Lucide</Text>
-          <SingleDatePicker />
+          <SingleDatePicker date={date} />
         </View>
         <Text style={{ color: "black" }}>Personnes</Text>
         <View style={styles.choicesContainer}>
