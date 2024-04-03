@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, KeyboardAvoidingView, ScrollView, Platform, } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { Divider } from "react-native-paper";
+import HistoryCard from "./HistoryCard";
 
 export default function DreamList() {
   const [dreams, setDreams] = useState([]);
@@ -31,16 +33,26 @@ export default function DreamList() {
     };
     updateComponent();
   }, [dreams]);
+  
 
   return (
+    <KeyboardAvoidingView
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+      style={{ flex: 1 }}
+    >
+      <ScrollView
+        keyboardShouldPersistTaps="handled"
+      >
     <View>
-      <Text style={styles.title}>Liste des Rêves :</Text>
       {dreams.map((dream, index) => (
-        <Text key={index} style={styles.dreamText}>
-          {dream.dreamText} - {dream.isLucidDream ? "Lucide" : "Non Lucide"}
-        </Text>
+        <View>
+          <HistoryCard key={index} dream={dream} />
+          <Divider style={styles.separator}/>
+        </View>
       ))}
     </View>
+    </ScrollView>
+    </KeyboardAvoidingView>
   );
 }
 
@@ -50,8 +62,9 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     marginBottom: 8,
   },
-  dreamText: {
-    fontSize: 16,
-    marginBottom: 4,
+  separator: {
+    marginVertical: 30,
+    height: 1,
+    width: '100%',
   },
 });

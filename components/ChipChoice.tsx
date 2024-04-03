@@ -13,7 +13,7 @@ const ChipChoice = ({ content, tabInfos }) => {
       setIsPressed(false);
     } else {
       setIsPressed(true);
-      tabInfos.push(content);
+      tabInfos.push({"content": content});
     }
   };
 
