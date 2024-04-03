@@ -51,7 +51,7 @@ export default function Parameters() {
             expanded={expanded}
             onPress={handlePress}
           >
-            <List.Item
+            <List.Item 
               title="Personne"
               onPress={() => handleCategorySelect("Personne")}
             />
@@ -90,9 +90,6 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: "bold",
     marginBottom: 20,
-  },
-  choix: {
-    color: "black",
   },
   formContainer: {
     width: "100%",
