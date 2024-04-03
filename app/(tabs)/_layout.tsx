@@ -52,7 +52,9 @@ export default function TabLayout() {
         name="astuces"
         options={{
           title: "Astuces",
-          tabBarIcon: ({ color }) => <TabBarIcon name="lightbulb-o" color={color} />,
+          tabBarIcon: ({ color }) => (
+            <TabBarIcon name="lightbulb-o" color={color} />
+          ),
         }}
       />
       <Tabs.Screen
@@ -66,7 +68,7 @@ export default function TabLayout() {
         name="parameters"
         options={{
           title: "Paramètres",
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+          tabBarIcon: ({ color }) => <TabBarIcon name="gear" color={color} />,
         }}
       />
       <Tabs.Screen

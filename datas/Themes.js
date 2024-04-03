@@ -1,14 +1,18 @@
-export const Themes = [
+export let Themes = [
     {
-        "name" : "Etudes"
+        "name": "Etudes"
     },
     {
-        "name" : "Relation"
+        "name": "Relation"
     },
     {
-        "name" : "Vie Professionelle"
+        "name": "Vie Professionelle"
     },
     {
-        "name" : "Famille"
+        "name": "Famille"
     }
 ];
+export function addTheme(name) {
+    console.log("entre add theme")
+    Themes.push({ "name": name });
+}

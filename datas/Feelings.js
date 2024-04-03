@@ -1,4 +1,4 @@
-export const Feelings = [
+export let Feelings = [
     {
         "name" : "Joie"
     },
@@ -33,3 +33,7 @@ export const Feelings = [
         "name" : "Malaise"
     }
     ];
+
+    export function addFeeling(name) {
+        Feelings.push({ "name": name });
+    }
