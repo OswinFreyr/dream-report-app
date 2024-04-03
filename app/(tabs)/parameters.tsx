@@ -14,12 +14,13 @@ function addElement(categorie, text) {
       addPerson(text);
     }
     else if (categorie === "Émotion"){
-      console.log("entree if emotion");
     addFeeling(text);
   }
-  else {
-    console.log("entree if theme");
+  else if (categorie === "Thème"){
     addTheme(text);
+  }
+  else {
+    console.log("Catégorie non reconnue");
   }
 }
 
@@ -52,7 +53,7 @@ export default function Parameters() {
             expanded={expanded}
             onPress={handlePress}
           >
-            <List.Item
+            <List.Item style={styles.choix}
               title="Personne"
               onPress={() => handleCategorySelect("Personne")}
             />
@@ -91,6 +92,9 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: "bold",
     marginBottom: 20,
+  },
+  choix : {
+    color : "black"
   },
   formContainer: {
     width: "100%",
