@@ -45,7 +45,7 @@ export default function Parameters() {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Paramètres</Text>
-      <View>
+      <View style={styles.formContainer}>
         <List.Section>
           <List.Accordion
             title={categorie !== "" ? categorie : "Sélectionner une catégorie"}
@@ -53,7 +53,7 @@ export default function Parameters() {
             expanded={expanded}
             onPress={handlePress}
           >
-            <List.Item style={styles.choix}
+            <List.Item 
               title="Personne"
               onPress={() => handleCategorySelect("Personne")}
             />
