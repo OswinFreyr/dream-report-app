@@ -11,7 +11,6 @@ const AstuceCard =  ({astuce}) => (
       style={{ flex: 1 }}
     >
       <ScrollView
-        contentContainerStyle
         keyboardShouldPersistTaps="handled"
       >
   <Card>
