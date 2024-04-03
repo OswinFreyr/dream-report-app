@@ -81,7 +81,7 @@ export default function DreamAnalysis() {
   );
 }
 
-const styles = StyleSheet.create( {
+const styles = StyleSheet.create({
   tableHeader: {
     flex: 1,
     fontWeight: "bold",

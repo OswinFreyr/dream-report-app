@@ -1,87 +1,151 @@
-import React, { useState } from "react";
-import { View, StyleSheet, Dimensions } from "react-native";
-import { TextInput, Button, Checkbox } from "react-native-paper";
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useState, useEffect } from "react";
+import { View, StyleSheet, Dimensions, ScrollView, KeyboardAvoidingView, Platform, } from "react-native";
+import { TextInput, Button, Switch, Text } from "react-native-paper";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import SingleDatePicker from "@/components/SingleDatePicker";
+import ChipChoice from "@/components/ChipChoice";
+import { People } from "@/datas/People";
+import { Feelings } from "@/datas/Feelings";
+import { Themes } from "@/datas/Themes";
 
 const { width } = Dimensions.get("window");
 
 export default function DreamForm() {
-    const [dreamText, setDreamText] = useState("");
-    const [isLucidDream, setIsLucidDream] = useState(false);
-    const handleResetDreams = async () => {
+  const [dreamTitle, setDreamTitle] = useState("");
+  const [dreamText, setDreamText] = useState("");
+  const [isLucidDream, setIsLucidDream] = useState(false);
+  const [date, setDate] = useState(undefined);
+  const [people, setPeople] = useState([]);
+  const [feelings, setFeelings] = useState([]);
+  const [themes, setThemes] = useState([]);
+  const [tabInfos, setTabInfos] = useState([]);
 
-    }
-    const handleDreamSubmission = async () => {
-    // Logique de traitement de la soumission du rêve
-    // console.log("Rêve soumis:", dreamText, "Lucide:", isLucidDream);
+  useEffect(() => {
+    const getPeopleData = async () => {
+      const peopleInfo = People.map((e) => e.name);
+      setPeople(peopleInfo);
+    };
+    getPeopleData();
+    const getFeelingsData = async () => {
+      const feelingsInfo = Feelings.map((e) => e.name);
+      setFeelings(feelingsInfo);
+    };
+    getFeelingsData();
+    const getThemesData = async () => {
+      const themesInfo = Themes.map((e) => e.name);
+      setThemes(themesInfo);
+    };
+    getThemesData();
+  }, []);
+
+  const onToggleSwitch = () => setIsLucidDream(!isLucidDream);
+
+  const handleDreamSubmission = async () => {
     try {
-        // Récupérer le tableau actuel depuis AsyncStorage
-        const existingData = await AsyncStorage.getItem('dreamFormDataArray');
-        const formDataArray = existingData ? JSON.parse(existingData) : [];
-        // Ajouter le nouveau formulaire au tableau
-        formDataArray.push({ dreamText, isLucidDream });
-        // Sauvegarder le tableau mis à jour dans AsyncStorage
-        await AsyncStorage.setItem('dreamFormDataArray', JSON.stringify(formDataArray));
-        console.log(
-        'AsyncStorage: ',
-        await AsyncStorage.getItem('dreamFormDataArray')
-        );
+      const existingData = await AsyncStorage.getItem("dreamFormDataArray");
+      const formDataArray = existingData ? JSON.parse(existingData) : [];
+      formDataArray.push({ dreamTitle, dreamText, date, isLucidDream, tabInfos });
+      await AsyncStorage.setItem(
+        "dreamFormDataArray",
+        JSON.stringify(formDataArray)
+      );
+      console.log(
+        "AsyncStorage:",
+        await AsyncStorage.getItem("dreamFormDataArray")
+      );
     } catch (error) {
-        console.error('Erreur lors de la sauvegarde des données:', error);
+      console.error("Error saving data:", error);
     }
-    // Réinitialisation du formulaire
+
+    setDreamTitle("");
     setDreamText("");
     setIsLucidDream(false);
-    };
+    setDate(undefined)
+    setTabInfos([]);
+  };
 
-    return (
-    <View style={styles.container}>
+  return (
+    <KeyboardAvoidingView
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+      style={{ flex: 1 }}
+    >
+      <ScrollView
+        contentContainerStyle={styles.container}
+        keyboardShouldPersistTaps="handled"
+      >
         <TextInput
-            label="Rêve"
-            value={dreamText}
-            onChangeText={(text) => setDreamText(text)}
-            mode="outlined"
-            multiline
-            numberOfLines={6}
-            style={[styles.input, { width: width * 0.8, alignSelf: "center" }]}
+          label="Rentrez un titre à votre rêve"
+          value={dreamTitle}
+          onChangeText={text => setDreamTitle(text)}
+        />
+        <TextInput
+          label="Rêve"
+          value={dreamText}
+          onChangeText={(text) => setDreamText(text)}
+          mode="outlined"
+          multiline
+          numberOfLines={6}
+          style={[styles.input, { width: width * 0.8 }]}
         />
         <View style={styles.checkboxContainer}>
-            <Checkbox.Item
-                label="Rêve Lucide"
-                status={isLucidDream ? "checked" : "unchecked"}
-                onPress={() => setIsLucidDream(!isLucidDream)}
-            />
+          <Switch value={isLucidDream} onValueChange={onToggleSwitch} />
+          <Text style={{ color: "black" }}>Rêve Lucide</Text>
+          <SingleDatePicker date={date} />
+        </View>
+        <Text style={{ color: "black" }}>Personnes</Text>
+        <View style={styles.choicesContainer}>
+          {people.map((name, index) => (
+            <ChipChoice key={index} content={name} tabInfos={tabInfos} />
+          ))}
+        </View>
+        <Text style={{ color: "black" }}>Thématiques</Text>
+        <View style={styles.choicesContainer}>
+          {themes.map((name, index) => (
+            <ChipChoice key={index} content={name} tabInfos={tabInfos} />
+          ))}
+        </View>
+        <Text style={{ color: "black" }}>Émotions</Text>
+        <View style={styles.choicesContainer}>
+          {feelings.map((name, index) => (
+            <ChipChoice key={index} content={name} tabInfos={tabInfos} />
+          ))}
         </View>
         <Button
-            mode="contained"
-            onPress={handleDreamSubmission}
-            style={styles.button}
+          mode="contained"
+          onPress={handleDreamSubmission}
+          style={styles.button}
         >
-            Soumettre
+          Soumettre
         </Button>
-        <Button
-            mode="contained"
-            onPress={handleResetDreams}
-            style={styles.button}
-        >
-            Reset Dreams
+        <Button mode="contained" onPress={() => {}} style={styles.button}>
+          Reset Dreams
         </Button>
-    </View>
-);}
+      </ScrollView>
+    </KeyboardAvoidingView>
+  );
+}
 
 const styles = StyleSheet.create({
-container: {
+  container: {
+    flexGrow: 1,
     padding: 16,
-},
-input: {
+  },
+  input: {
     marginBottom: 16,
-},
-checkboxContainer: {
+  },
+  checkboxContainer: {
     flexDirection: "row",
     alignItems: "center",
     marginBottom: 16,
-},
-button: {
+  },
+  button: {
     marginTop: 8,
-},
+    marginBottom: 8,
+  },
+  choicesContainer: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    alignItems: "center",
+    marginBottom: 16,
+  },
 });
