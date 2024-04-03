@@ -5,7 +5,7 @@ import DreamList from '@/components/DreamList';
 export default function TabHistory() {
     return (
         <View style={styles.container}>
-            <Text style={styles.title}>Historique</Text>
+            <Text style={styles.title}>Liste des Rêves :</Text>
             <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
             <DreamList />
         </View>
@@ -21,6 +21,7 @@ container: {
 title: {
     fontSize: 20,
     fontWeight: 'bold',
+    marginTop: 20,
 },
 separator: {
     marginVertical: 30,
