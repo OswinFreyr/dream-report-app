@@ -52,7 +52,6 @@ export default function Parameters() {
             onPress={handlePress}
           >
             <List.Item
-              style={styles.choix}
               title="Personne"
               onPress={() => handleCategorySelect("Personne")}
             />
