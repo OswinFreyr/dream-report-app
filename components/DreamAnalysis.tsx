@@ -1,15 +1,14 @@
 import React, { useState } from "react";
 import { View, Text, Button, StyleSheet } from "react-native";
-import { API_KEY, API_URL } from '@env'
 
 export default function DreamAnalysis() {
   const [apiResponse, setApiResponse] = useState(null);
   const handleApiRequest = async () => {
     try {
-      const apiUrl = API_URL;
+      const apiUrl = "https://api.meaningcloud.com/topics-2.0";
       const language = "fr";
       const tmpDream = "Un truc important s'est passé avec gérard";
-      const apiKey = API_KEY;
+      const apiKey = "bcd1ea9fc7ab51e2bc69736e28d91941";
       const formdata = new FormData();
       formdata.append("key", apiKey);
       formdata.append("txt", tmpDream);
