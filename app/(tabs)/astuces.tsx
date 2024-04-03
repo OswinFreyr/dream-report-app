@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, } from 'react-native';
 import { useIsFocused } from '@react-navigation/native';
 import { Text, View } from '@/components/Themed';
 import AstuceCard from '@/components/AstuceCard';
@@ -31,6 +31,7 @@ export default function TabAstuces() {
     }});
 
     return (
+    
         <View style={styles.container}>
             <Text style={styles.title}>Une astuce aléatoire</Text>
             <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
@@ -48,6 +49,7 @@ container: {
 title: {
     fontSize: 20,
     fontWeight: 'bold',
+    marginTop: 20,
 },
 separator: {
     marginVertical: 30,
