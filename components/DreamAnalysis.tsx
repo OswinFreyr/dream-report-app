@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { View, Text, Button, StyleSheet } from "react-native";
-import { API_KEY, API_URL } from '@env'
+// import { API_KEY, API_URL } from '@env'
 
 export default function DreamAnalysis() {
   const [apiResponse, setApiResponse] = useState(null);
