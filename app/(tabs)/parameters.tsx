@@ -4,22 +4,18 @@ import { Button } from "react-native-paper";
 import { useState } from "react";
 import { View, Text } from "react-native";
 import { List, TextInput } from "react-native-paper";
-import { addPerson } from '@/datas/People'
-import { addFeeling } from '@/datas/Feelings'
-import { addTheme } from '@/datas/Themes'
-
+import { addPerson } from "@/datas/People";
+import { addFeeling } from "@/datas/Feelings";
+import { addTheme } from "@/datas/Themes";
 
 function addElement(categorie, text) {
-  if (categorie === "Personne"){
-      addPerson(text);
-    }
-    else if (categorie === "Émotion"){
+  if (categorie === "Personne") {
+    addPerson(text);
+  } else if (categorie === "Émotion") {
     addFeeling(text);
-  }
-  else if (categorie === "Thème"){
+  } else if (categorie === "Thème") {
     addTheme(text);
-  }
-  else {
+  } else {
     console.log("Catégorie non reconnue");
   }
 }
@@ -45,7 +41,9 @@ export default function Parameters() {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Paramètres</Text>
-      <View style={styles.formContainer}>
+      <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
+
+      <View>
         <List.Section>
           <List.Accordion
             title={categorie !== "" ? categorie : "Sélectionner une catégorie"}
@@ -93,9 +91,6 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     marginBottom: 20,
   },
-  choix : {
-    color : "black"
-  },
   formContainer: {
     width: "100%",
     backgroundColor: "#fff",
@@ -115,5 +110,9 @@ const styles = StyleSheet.create({
   },
   Button: {
     marginTop: 10,
-  },
+  },separator: {
+    marginVertical: 30,
+    height: 1,
+    width: '80%',
+},
 });
