@@ -13,6 +13,5 @@ export let Themes = [
     }
 ];
 export function addTheme(name) {
-    console.log("entrée add theme")
     Themes.push({ "name": name });
 }
