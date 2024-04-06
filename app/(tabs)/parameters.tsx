@@ -41,13 +41,12 @@ export default function Parameters() {
 
   const handleClearAsyncStorage = async () => {
     try {
-      await AsyncStorage.removeItem('dreamFormDataArray');
-      console.log('AsyncStorage vidé avec succès.');
+      await AsyncStorage.removeItem("dreamFormDataArray");
+      console.log("AsyncStorage vidé avec succès.");
     } catch (error) {
-      console.error('Erreur lors de la suppression de l\'AsyncStorage :', error);
+      console.error("Erreur lors de la suppression de l'AsyncStorage :", error);
     }
-  
-  }
+  };
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Paramètres</Text>
@@ -84,12 +83,13 @@ export default function Parameters() {
           value={text}
           onChangeText={(text) => setText(text)}
         />
-        <Button mode="contained" onPress={handleAddElement}>
+        <Button style={{marginTop: 20}} mode="contained" onPress={handleAddElement}>
           Ajouter
         </Button>
       </View>
-      <Button  onPress={handleClearAsyncStorage} > Vider Async Storage</Button>
-
+      <View style={styles.buttonContainer}>
+        <Button mode="contained" onPress={handleClearAsyncStorage}> Vider Async Storage</Button>
+      </View>
     </View>
   );
 }
@@ -108,6 +108,21 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   formContainer: {
+    width: "100%",
+    backgroundColor: "#fff",
+    borderRadius: 10,
+    padding: 20,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
+  },
+  buttonContainer: {
+    marginTop: 20, 
     width: "100%",
     backgroundColor: "#fff",
     borderRadius: 10,
