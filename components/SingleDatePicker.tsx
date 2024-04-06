@@ -5,15 +5,14 @@ import { DatePickerModal } from "react-native-paper-dates";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import fr from "react-native-paper-dates/src/translations/fr";
 
-import { registerTranslation } from 'react-native-paper-dates'
+import { registerTranslation } from "react-native-paper-dates";
 
-export default function SingleDatePicker({setDate, date}) {
-
-  registerTranslation('fr', {
-    save: 'Sauvegarder',
-    selectSingle: 'Selectionner une date',
-    selectMultiple: 'Selectionner plusieurs dates',
-    selectRange: 'Selectionner une periode',
+export default function SingleDatePicker({ setDate, date }) {
+  registerTranslation("fr", {
+    save: "Sauvegarder",
+    selectSingle: "Selectionner une date",
+    selectMultiple: "Selectionner plusieurs dates",
+    selectRange: "Selectionner une periode",
     notAccordingToDateFormat: (inputFormat) =>
       `Le format de la date doit être ${inputFormat}`,
     mustBeHigherThan: (date) => `Doit être après ${date}`,
@@ -21,17 +20,16 @@ export default function SingleDatePicker({setDate, date}) {
     mustBeBetween: (startDate, endDate) =>
       `Doit être entre ${startDate} - ${endDate}`,
     dateIsDisabled: "Ce jour n'est pas autorise",
-    previous: 'Precedent·e',
-    next: 'Suivant·e',
-    typeInDate: 'Saisir une date',
-    pickDateFromCalendar: 'Choisir une date à partir du calendrier',
-    close: 'Fermer',
-    hour: 'Heure',
-    minute: 'Minute',
-  })
+    previous: "Precedent·e",
+    next: "Suivant·e",
+    typeInDate: "Saisir une date",
+    pickDateFromCalendar: "Choisir une date à partir du calendrier",
+    close: "Fermer",
+    hour: "Heure",
+    minute: "Minute",
+  });
 
   const [open, setOpen] = useState(false);
-  
 
   const onDismissSingle = useCallback(() => {
     setOpen(false);
@@ -40,14 +38,14 @@ export default function SingleDatePicker({setDate, date}) {
   const onConfirmSingle = useCallback(
     (params) => {
       setOpen(false);
-      setDate(params.date);
+      params.setDate(params.date);
     },
     [setOpen, setDate]
   );
-  
+
   return (
     <SafeAreaProvider>
-      <View style={{justifyContent: 'center', flex: 1, alignItems: 'center'}}>
+      <View style={{ justifyContent: "center", flex: 1, alignItems: "center" }}>
         <Button onPress={() => setOpen(true)} uppercase={false} mode="outlined">
           Choisir une date
         </Button>

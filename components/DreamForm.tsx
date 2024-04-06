@@ -1,5 +1,12 @@
 import { useState, useEffect } from "react";
-import { View, StyleSheet, Dimensions, ScrollView, KeyboardAvoidingView, Platform, } from "react-native";
+import {
+  View,
+  StyleSheet,
+  Dimensions,
+  ScrollView,
+  KeyboardAvoidingView,
+  Platform,
+} from "react-native";
 import { TextInput, Button, Switch, Text } from "react-native-paper";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import SingleDatePicker from "@/components/SingleDatePicker";
@@ -8,7 +15,7 @@ import { People } from "@/datas/People";
 import { Feelings } from "@/datas/Feelings";
 import { Themes } from "@/datas/Themes";
 
-import { useIsFocused } from '@react-navigation/native';
+import { useIsFocused } from "@react-navigation/native";
 
 const { width } = Dimensions.get("window");
 
@@ -22,7 +29,7 @@ export default function DreamForm() {
   const [themes, setThemes] = useState([]);
   const [tabInfos, setTabInfos] = useState([]);
 
-  const isFocused = useIsFocused()
+  const isFocused = useIsFocused();
 
   useEffect(() => {
     const getPeopleData = async () => {
@@ -37,14 +44,14 @@ export default function DreamForm() {
       const themesInfo = Themes.map((e) => e.name);
       setThemes(themesInfo);
     };
-    if(isFocused) {
+    if (isFocused) {
       getPeopleData();
       getFeelingsData();
       getThemesData();
     }
+    handleDreamSubmission();
   }, [isFocused]);
-  
-  
+
   const onToggleSwitch = () => setIsLucidDream(!isLucidDream);
 
   const handleDreamSubmission = async () => {
@@ -56,14 +63,13 @@ export default function DreamForm() {
         "dreamFormDataArray",
         JSON.stringify(formDataArray)
       );
-      console.log(
-        "AsyncStorage:",
-        await AsyncStorage.getItem("dreamFormDataArray")
-      );
+      console.log("AsyncStorage:", await AsyncStorage.getItem("dreamFormDataArray"));
+      
+  
     } catch (error) {
       console.error("Error saving data:", error);
     }
-
+  
     setDreamTitle("");
     setDreamText("");
     setIsLucidDream(false);
@@ -83,7 +89,7 @@ export default function DreamForm() {
         <TextInput
           label="Rentrez un titre à votre rêve"
           value={dreamTitle}
-          onChangeText={text => setDreamTitle(text)}
+          onChangeText={(text) => setDreamTitle(text)}
         />
         <TextInput
           label="Rêve"

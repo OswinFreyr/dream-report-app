@@ -7,6 +7,7 @@ import { List, TextInput } from "react-native-paper";
 import { addPerson } from "@/datas/People";
 import { addFeeling } from "@/datas/Feelings";
 import { addTheme } from "@/datas/Themes";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 function addElement(categorie, text) {
   if (categorie === "Personne") {
@@ -38,11 +39,24 @@ export default function Parameters() {
     setCategorie("");
   };
 
+  const handleClearAsyncStorage = async () => {
+    try {
+      await AsyncStorage.removeItem('dreamFormDataArray');
+      console.log('AsyncStorage vidé avec succès.');
+    } catch (error) {
+      console.error('Erreur lors de la suppression de l\'AsyncStorage :', error);
+    }
+  
+  }
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Paramètres</Text>
-      <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-      
+      <View
+        style={styles.separator}
+        lightColor="#eee"
+        darkColor="rgba(255,255,255,0.1)"
+      />
+
       <View style={styles.formContainer}>
         <List.Section>
           <List.Accordion
@@ -51,7 +65,7 @@ export default function Parameters() {
             expanded={expanded}
             onPress={handlePress}
           >
-            <List.Item 
+            <List.Item
               title="Personne"
               onPress={() => handleCategorySelect("Personne")}
             />
@@ -74,6 +88,8 @@ export default function Parameters() {
           Ajouter
         </Button>
       </View>
+      <Button  onPress={handleClearAsyncStorage} > Vider Async Storage</Button>
+
     </View>
   );
 }
@@ -110,9 +126,10 @@ const styles = StyleSheet.create({
   },
   Button: {
     marginTop: 10,
-  },separator: {
+  },
+  separator: {
     marginVertical: 30,
     height: 1,
-    width: '80%',
-},
+    width: "80%",
+  },
 });
