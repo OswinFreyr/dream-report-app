@@ -79,13 +79,12 @@ export default function DreamForm() {
         await AsyncStorage.getItem("dreamFormDataArray")
       );
 
-      // Réinitialiser les champs et le dialogue après la soumission réussie
       setDreamTitle("");
       setDreamText("");
       setIsLucidDream(false);
       setDate(undefined);
       setTabInfos([]);
-      setDialogVisible(false); // Fermer le dialogue si soumission réussie
+      setDialogVisible(false); 
     } catch (error) {
       console.error("Error saving data:", error);
     }
