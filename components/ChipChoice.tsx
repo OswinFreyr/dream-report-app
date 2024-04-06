@@ -13,16 +13,16 @@ const ChipChoice = ({ content, tabInfos }) => {
       setIsPressed(false);
     } else {
       setIsPressed(true);
-      tabInfos.push({"content": content});
+      tabInfos.push({ content: content });
     }
   };
 
   return (
     <Chip
-      icon="information"
+      // icon="information"
       onPress={handlePress}
       style={{
-        backgroundColor: isPressed ? "#b9b686" : "#d6d162",
+        backgroundColor: isPressed ? "#d0bcff" : "#ab9ccf",
         marginRight: 5,
         marginTop: 5,
       }}

@@ -1,5 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, Button, StyleSheet, TextInput, TouchableOpacity, FlatList, ScrollView } from "react-native";
+import {
+  View,
+  Text,
+  Button,
+  StyleSheet,
+  TextInput,
+  TouchableOpacity,
+  FlatList,
+  ScrollView,
+} from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function DreamAnalysis() {
@@ -14,7 +23,9 @@ export default function DreamAnalysis() {
 
   const fetchDreamsFromStorage = async () => {
     try {
-      const dreamFormDataArray = await AsyncStorage.getItem("dreamFormDataArray");
+      const dreamFormDataArray = await AsyncStorage.getItem(
+        "dreamFormDataArray"
+      );
       if (dreamFormDataArray) {
         const formDataArray = JSON.parse(dreamFormDataArray);
         setDreams(formDataArray);
@@ -23,13 +34,18 @@ export default function DreamAnalysis() {
         console.error("Aucune donnée de rêve trouvée dans AsyncStorage.");
       }
     } catch (error) {
-      console.error("Erreur lors de la récupération des données de rêve depuis AsyncStorage :", error);
+      console.error(
+        "Erreur lors de la récupération des données de rêve depuis AsyncStorage :",
+        error
+      );
     }
   };
 
   const handleSearch = (text) => {
     setSearchText(text);
-    const filtered = dreams.filter(dream => dream.dreamTitle.toLowerCase().includes(text.toLowerCase()));
+    const filtered = dreams.filter((dream) =>
+      dream.dreamTitle.toLowerCase().includes(text.toLowerCase())
+    );
     setFilteredDreams(filtered);
   };
 
@@ -37,11 +53,17 @@ export default function DreamAnalysis() {
     try {
       const newDream = { dreamTitle, dreamText };
       const updatedDreams = [...dreams, newDream];
-      await AsyncStorage.setItem("dreamFormDataArray", JSON.stringify(updatedDreams));
+      await AsyncStorage.setItem(
+        "dreamFormDataArray",
+        JSON.stringify(updatedDreams)
+      );
       setDreams(updatedDreams);
       setFilteredDreams(updatedDreams);
     } catch (error) {
-      console.error("Erreur lors de l'enregistrement du rêve dans AsyncStorage :", error);
+      console.error(
+        "Erreur lors de l'enregistrement du rêve dans AsyncStorage :",
+        error
+      );
     }
   };
 
@@ -90,9 +112,7 @@ export default function DreamAnalysis() {
     const entryList = [...conceptsList, ...entitiesList];
     return (
       <ScrollView style={styles.scrollView}>
-        <Text style={{ fontWeight: "bold", marginBottom: 10 }}>
-          Tableau des données :
-        </Text>
+        <Text style={{ marginBottom: 10 }}>Analyse du rêve :</Text>
         <View style={{ flexDirection: "row", marginBottom: 5 }}>
           <Text style={styles.tableHeader}>Type d'Entrée</Text>
           <Text style={styles.tableHeader}>Pertinence</Text>
@@ -124,16 +144,11 @@ export default function DreamAnalysis() {
         renderItem={renderItem}
         keyExtractor={(item, index) => index.toString()}
       />
-      <Button
+      {/* <Button
         title="Effectuer la requête à MeaningCloud"
         onPress={() => handleDreamSubmission("Nouveau rêve", "Contenu du nouveau rêve")}
-      />
-      {apiResponse && (
-        <View>
-          <Text>Réponse de l'API :</Text>
-          {renderTable()}
-        </View>
-      )}
+      /> */}
+      {apiResponse && <View style={{ marginTop: 40 }}>{renderTable()}</View>}
     </View>
   );
 }
@@ -168,6 +183,6 @@ const styles = StyleSheet.create({
     marginRight: 5,
   },
   scrollView: {
-    maxHeight: 200, 
+    maxHeight: 200,
   },
 });

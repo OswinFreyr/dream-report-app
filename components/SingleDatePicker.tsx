@@ -38,7 +38,7 @@ export default function SingleDatePicker({ setDate, date }) {
   const onConfirmSingle = useCallback(
     (params) => {
       setOpen(false);
-      params.setDate(params.date);
+      setDate(params.date);
     },
     [setOpen, setDate]
   );
@@ -46,8 +46,13 @@ export default function SingleDatePicker({ setDate, date }) {
   return (
     <SafeAreaProvider>
       <View style={{ justifyContent: "center", flex: 1, alignItems: "center" }}>
-        <Button onPress={() => setOpen(true)} uppercase={false} mode="outlined">
-          Choisir une date
+        <Button
+          mode="contained"
+          onPress={() => setOpen(true)}
+          uppercase={false}
+          // mode="outlined"
+        >
+          Choisir une date *
         </Button>
         {date && <Text style={{ color: "black" }}> {date.toDateString()}</Text>}
         <DatePickerModal

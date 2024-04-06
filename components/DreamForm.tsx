@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   StyleSheet,
@@ -7,7 +7,7 @@ import {
   KeyboardAvoidingView,
   Platform,
 } from "react-native";
-import { TextInput, Button, Switch, Text } from "react-native-paper";
+import { TextInput, Button, Switch, Text, Dialog } from "react-native-paper";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import SingleDatePicker from "@/components/SingleDatePicker";
 import ChipChoice from "@/components/ChipChoice";
@@ -28,6 +28,7 @@ export default function DreamForm() {
   const [feelings, setFeelings] = useState([]);
   const [themes, setThemes] = useState([]);
   const [tabInfos, setTabInfos] = useState([]);
+  const [dialogVisible, setDialogVisible] = useState(false);
 
   const isFocused = useIsFocused();
 
@@ -49,32 +50,45 @@ export default function DreamForm() {
       getFeelingsData();
       getThemesData();
     }
-    handleDreamSubmission();
   }, [isFocused]);
 
   const onToggleSwitch = () => setIsLucidDream(!isLucidDream);
 
   const handleDreamSubmission = async () => {
+    if (!dreamTitle || !dreamText || !date) {
+      setDialogVisible(true);
+      return;
+    }
+
     try {
       const existingData = await AsyncStorage.getItem("dreamFormDataArray");
       const formDataArray = existingData ? JSON.parse(existingData) : [];
-      formDataArray.push({ dreamTitle, dreamText, date, isLucidDream, tabInfos });
+      formDataArray.push({
+        dreamTitle,
+        dreamText,
+        date,
+        isLucidDream,
+        tabInfos,
+      });
       await AsyncStorage.setItem(
         "dreamFormDataArray",
         JSON.stringify(formDataArray)
       );
-      console.log("AsyncStorage:", await AsyncStorage.getItem("dreamFormDataArray"));
-      
-  
+      console.log(
+        "AsyncStorage:",
+        await AsyncStorage.getItem("dreamFormDataArray")
+      );
+
+      // Réinitialiser les champs et le dialogue après la soumission réussie
+      setDreamTitle("");
+      setDreamText("");
+      setIsLucidDream(false);
+      setDate(undefined);
+      setTabInfos([]);
+      setDialogVisible(false); // Fermer le dialogue si soumission réussie
     } catch (error) {
       console.error("Error saving data:", error);
     }
-  
-    setDreamTitle("");
-    setDreamText("");
-    setIsLucidDream(false);
-    setDate(undefined)
-    setTabInfos([]);
   };
 
   return (
@@ -102,8 +116,8 @@ export default function DreamForm() {
         />
         <View style={styles.checkboxContainer}>
           <Switch value={isLucidDream} onValueChange={onToggleSwitch} />
-          <Text style={{ color: "black" }}>Rêve Lucide</Text>
-          <SingleDatePicker setDate={setDate} date={date} />
+          <Text style={{ color: "black", marginLeft: 5 }}>Rêve Lucide</Text>
+          <SingleDatePicker date={date} setDate={setDate} />
         </View>
         <Text style={{ color: "black" }}>Personnes</Text>
         <View style={styles.choicesContainer}>
@@ -134,6 +148,17 @@ export default function DreamForm() {
           Reset Dreams
         </Button>
       </ScrollView>
+      <Dialog visible={dialogVisible} onDismiss={() => setDialogVisible(false)}>
+        <Dialog.Title>Champs obligatoires manquants</Dialog.Title>
+        <Dialog.Content>
+          <Text>Veuillez remplir tous les champs obligatoires. (*)</Text>
+        </Dialog.Content>
+        <Dialog.Actions>
+          <Button onPress={() => setDialogVisible(false)}>
+            J'ai compris !
+          </Button>
+        </Dialog.Actions>
+      </Dialog>
     </KeyboardAvoidingView>
   );
 }
