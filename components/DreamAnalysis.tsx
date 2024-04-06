@@ -9,7 +9,6 @@ import {
   ScrollView,
 } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-// import { API_KEY, API_URL } from '@env';
 import { useIsFocused } from "@react-navigation/native";
 
 
