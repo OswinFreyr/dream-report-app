@@ -75,15 +75,10 @@ export default function DreamForm() {
         JSON.stringify(formDataArray)
       );
 
-
-      setDreams(updatedDreams);
-      setFilteredDreams(updatedDreams)
-
-
-      console.log(
-        "AsyncStorage:",
-        await AsyncStorage.getItem("dreamFormDataArray")
-      );
+      // console.log(
+      //   "AsyncStorage:",
+      //   await AsyncStorage.getItem("dreamFormDataArray")
+      // );
 
       setDreamTitle("");
       setDreamText("");
