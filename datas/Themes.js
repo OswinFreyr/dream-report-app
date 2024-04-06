@@ -13,6 +13,6 @@ export let Themes = [
     }
 ];
 export function addTheme(name) {
-    console.log("entre add theme")
+    console.log("entrée add theme")
     Themes.push({ "name": name });
 }

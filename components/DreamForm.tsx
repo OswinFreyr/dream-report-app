@@ -20,23 +20,6 @@ export default function DreamForm() {
   const [themes, setThemes] = useState([]);
   const [tabInfos, setTabInfos] = useState([]);
 
-  useEffect(() => {
-    const getPeopleData = async () => {
-      const peopleInfo = People.map((e) => e.name);
-      setPeople(peopleInfo);
-    };
-    getPeopleData();
-    const getFeelingsData = async () => {
-      const feelingsInfo = Feelings.map((e) => e.name);
-      setFeelings(feelingsInfo);
-    };
-    getFeelingsData();
-    const getThemesData = async () => {
-      const themesInfo = Themes.map((e) => e.name);
-      setThemes(themesInfo);
-    };
-    getThemesData();
-  }, []);
 
   const onToggleSwitch = () => setIsLucidDream(!isLucidDream);
 
