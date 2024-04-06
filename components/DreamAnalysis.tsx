@@ -2,19 +2,13 @@ import React, { useState, useEffect } from "react";
 import {
   View,
   Text,
-  Button,
-  StyleSheet,
   TextInput,
   TouchableOpacity,
   FlatList,
+  StyleSheet,
   ScrollView,
 } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-
-
-// import { API_KEY, API_URL } from '../';
-
-
 
 export default function DreamAnalysis() {
   const [apiResponse, setApiResponse] = useState(null);
@@ -36,28 +30,28 @@ export default function DreamAnalysis() {
         setDreams(formDataArray);
         setFilteredDreams(formDataArray);
       } else {
-        console.error("Aucune donnée de rêve trouvée dans AsyncStorage.");
+        console.error("No dream data found in AsyncStorage.");
       }
     } catch (error) {
-      console.error(
-        "Erreur lors de la récupération des données de rêve depuis AsyncStorage :",
-        error
-      );
+      console.error("Error fetching dream data from AsyncStorage:", error);
     }
   };
 
+  useEffect(() => {
+    setFilteredDreams(
+      dreams.filter((dream) =>
+        dream.dreamTitle.toLowerCase().includes(searchText.toLowerCase())
+      )
+    );
+  }, [dreams, searchText]);
+
   const handleSearch = (text) => {
     setSearchText(text);
-    const filtered = dreams.filter((dream) =>
-      dream.dreamTitle.toLowerCase().includes(text.toLowerCase())
-    );
-    setFilteredDreams(filtered);
   };
 
-
   const handleDreamSelection = (index) => {
-    console.log("Index du rêve sélectionné :", index);
-    const selectedDream = dreams[index];
+    console.log("Index of selected dream:", index);
+    const selectedDream = filteredDreams[index];
     handleApiRequest(selectedDream.dreamText);
   };
 
@@ -75,13 +69,13 @@ export default function DreamAnalysis() {
         body: formdata,
         redirect: "follow",
       };
-      console.log("dream text : " + dreamText);
+      console.log("Dream text:", dreamText);
       const response = await fetch(apiUrl, requestOptions);
       const responseData = await response.json();
       setApiResponse(responseData);
-      console.log("Réponse de l'API MeaningCloud :", responseData);
+      console.log("MeaningCloud API response:", responseData);
     } catch (error) {
-      console.error("Erreur lors de la requête à l'API MeaningCloud :", error);
+      console.error("Error making request to MeaningCloud API:", error);
     }
   };
 
@@ -100,12 +94,12 @@ export default function DreamAnalysis() {
     const entryList = [...conceptsList, ...entitiesList];
     return (
       <ScrollView style={styles.scrollView}>
-        <Text style={{ marginBottom: 10 }}>Analyse du rêve :</Text>
+        <Text style={{ marginBottom: 10 }}>Dream Analysis:</Text>
         <View style={{ flexDirection: "row", marginBottom: 5 }}>
-          <Text style={styles.tableHeader}>Type d'Entrée</Text>
-          <Text style={styles.tableHeader}>Pertinence</Text>
-          <Text style={styles.tableHeader}>Terme</Text>
-          <Text style={styles.tableHeader}>Type Sémantique</Text>
+          <Text style={styles.tableHeader}>Entry Type</Text>
+          <Text style={styles.tableHeader}>Relevance</Text>
+          <Text style={styles.tableHeader}>Term</Text>
+          <Text style={styles.tableHeader}>Semantic Type</Text>
         </View>
         {entryList.map((entry, index) => (
           <View key={index} style={{ flexDirection: "row", marginBottom: 5 }}>
@@ -123,7 +117,7 @@ export default function DreamAnalysis() {
     <View style={styles.container}>
       <TextInput
         style={styles.searchInput}
-        placeholder="Rechercher un rêve..."
+        placeholder="Search for a dream..."
         onChangeText={handleSearch}
         value={searchText}
       />
@@ -132,10 +126,6 @@ export default function DreamAnalysis() {
         renderItem={renderItem}
         keyExtractor={(item, index) => index.toString()}
       />
-      {/* <Button
-        title="Effectuer la requête à MeaningCloud"
-        onPress={() => handleDreamSubmission("Nouveau rêve", "Contenu du nouveau rêve")}
-      /> */}
       {apiResponse && <View style={{ marginTop: 40 }}>{renderTable()}</View>}
     </View>
   );
