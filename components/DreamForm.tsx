@@ -49,31 +49,43 @@ export default function DreamForm() {
       getFeelingsData();
       getThemesData();
     }
-    handleDreamSubmission();
+    // handleDreamSubmission();
   }, [isFocused]);
 
   const onToggleSwitch = () => setIsLucidDream(!isLucidDream);
 
   const handleDreamSubmission = async () => {
+    if (!dreamTitle || !dreamText || !date) {
+      console.log("Veuillez remplir tous les champs obligatoires.");
+      return;
+    }
+
     try {
       const existingData = await AsyncStorage.getItem("dreamFormDataArray");
       const formDataArray = existingData ? JSON.parse(existingData) : [];
-      formDataArray.push({ dreamTitle, dreamText, date, isLucidDream, tabInfos });
+      formDataArray.push({
+        dreamTitle,
+        dreamText,
+        date,
+        isLucidDream,
+        tabInfos,
+      });
       await AsyncStorage.setItem(
         "dreamFormDataArray",
         JSON.stringify(formDataArray)
       );
-      console.log("AsyncStorage:", await AsyncStorage.getItem("dreamFormDataArray"));
-      
-  
+      console.log(
+        "AsyncStorage:",
+        await AsyncStorage.getItem("dreamFormDataArray")
+      );
     } catch (error) {
       console.error("Error saving data:", error);
     }
-  
+
     setDreamTitle("");
     setDreamText("");
     setIsLucidDream(false);
-    setDate(undefined)
+    setDate(undefined);
     setTabInfos([]);
   };
 
@@ -87,12 +99,12 @@ export default function DreamForm() {
         keyboardShouldPersistTaps="handled"
       >
         <TextInput
-          label="Rentrez un titre à votre rêve"
+          label="Rentrez un titre à votre rêve *"
           value={dreamTitle}
           onChangeText={(text) => setDreamTitle(text)}
         />
         <TextInput
-          label="Rêve"
+          label="Rêve *"
           value={dreamText}
           onChangeText={(text) => setDreamText(text)}
           mode="outlined"
@@ -103,7 +115,7 @@ export default function DreamForm() {
         <View style={styles.checkboxContainer}>
           <Switch value={isLucidDream} onValueChange={onToggleSwitch} />
           <Text style={{ color: "black" }}>Rêve Lucide</Text>
-          <SingleDatePicker date={date} setDate={setDate}/>
+          <SingleDatePicker date={date} setDate={setDate} />
         </View>
         <Text style={{ color: "black" }}>Personnes</Text>
         <View style={styles.choicesContainer}>
