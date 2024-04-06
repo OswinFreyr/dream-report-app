@@ -12,7 +12,7 @@ import {
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 
-import { API_KEY, API_URL } from '../';
+// import { API_KEY, API_URL } from '../';
 
 
 
@@ -54,23 +54,6 @@ export default function DreamAnalysis() {
     setFilteredDreams(filtered);
   };
 
-  const handleDreamSubmission = async (dreamTitle, dreamText) => {
-    try {
-      const newDream = { dreamTitle, dreamText };
-      const updatedDreams = [...dreams, newDream];
-      await AsyncStorage.setItem(
-        "dreamFormDataArray",
-        JSON.stringify(updatedDreams)
-      );
-      setDreams(updatedDreams);
-      setFilteredDreams(updatedDreams);
-    } catch (error) {
-      console.error(
-        "Erreur lors de l'enregistrement du rêve dans AsyncStorage :",
-        error
-      );
-    }
-  };
 
   const handleDreamSelection = (index) => {
     console.log("Index du rêve sélectionné :", index);
@@ -80,11 +63,11 @@ export default function DreamAnalysis() {
 
   const handleApiRequest = async (dreamText) => {
     try {
-      // const apiUrl = "https://api.meaningcloud.com/topics-2.0";
+      const apiUrl = "https://api.meaningcloud.com/topics-2.0";
       const language = "fr";
-      // const apiKey = "bcd1ea9fc7ab51e2bc69736e28d91941";
+      const apiKey = "bcd1ea9fc7ab51e2bc69736e28d91941";
       const formdata = new FormData();
-      formdata.append("key", API_KEY);
+      formdata.append("key", apiKey);
       formdata.append("txt", dreamText);
       formdata.append("lang", language);
       const requestOptions = {
@@ -93,7 +76,7 @@ export default function DreamAnalysis() {
         redirect: "follow",
       };
       console.log("dream text : " + dreamText);
-      const response = await fetch(API_URL, requestOptions);
+      const response = await fetch(apiUrl, requestOptions);
       const responseData = await response.json();
       setApiResponse(responseData);
       console.log("Réponse de l'API MeaningCloud :", responseData);

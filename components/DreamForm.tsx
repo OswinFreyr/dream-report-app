@@ -74,6 +74,12 @@ export default function DreamForm() {
         "dreamFormDataArray",
         JSON.stringify(formDataArray)
       );
+
+
+      setDreams(updatedDreams);
+      setFilteredDreams(updatedDreams)
+
+
       console.log(
         "AsyncStorage:",
         await AsyncStorage.getItem("dreamFormDataArray")
