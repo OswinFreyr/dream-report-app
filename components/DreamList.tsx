@@ -6,7 +6,7 @@ import HistoryCard from "./HistoryCard";
 
 export default function DreamList() {
   const [dreams, setDreams] = useState([]);
-  // Ce useEffect est executé une seule fois à l'instanciation du composant
+  
   useEffect(() => {
     const fetchData = async () => {
       try {
