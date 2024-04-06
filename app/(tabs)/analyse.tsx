@@ -14,11 +14,6 @@ export default function TabTests() {
         lightColor="#eee"
         darkColor="rgba(255,255,255,0.1)"
       />
-      <View
-        style={styles.separator}
-        lightColor="#eee"
-        darkColor="rgba(255,255,255,0.1)"
-      />
       <DreamAnalysis />
     </View>
   );
@@ -33,6 +28,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 20,
     fontWeight: "bold",
+    marginTop: 20,
   },
   separator: {
     marginVertical: 30,
