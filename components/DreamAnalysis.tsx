@@ -65,9 +65,9 @@ export default function DreamAnalysis() {
 
   const handleApiRequest = async (dreamText) => {
     try {
-      const apiUrl = process.env.API_URL;
+      const apiUrl = process.env.EXPO_PUBLIC_API_URL;
       const language = "fr";
-      const apiKey = process.env.API_KEY;
+      const apiKey = process.env.EXPO_PUBLIC_API_KEY;
       const formdata = new FormData();
       formdata.append("key", apiKey);
       formdata.append("txt", dreamText);
