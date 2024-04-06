@@ -144,9 +144,7 @@ export default function DreamForm() {
         >
           Soumettre
         </Button>
-        <Button mode="contained" onPress={() => {}} style={styles.button}>
-          Reset Dreams
-        </Button>
+        
       </ScrollView>
       <Dialog visible={dialogVisible} onDismiss={() => setDialogVisible(false)}>
         <Dialog.Title>Champs obligatoires manquants</Dialog.Title>
