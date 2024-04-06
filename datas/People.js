@@ -1,18 +1,9 @@
 export let People = [
     {
-        "name": "Pierre Palmade"
+        "name": "Papa"
     },
     {
-        "name": "Aubrey Plaza"
-    },
-    {
-        "name": "Mickey Mouse et ses gants"
-    },
-    {
-        "name": "Brigitte Bardot"
-    },
-    {
-        "name": "Feldawp du Brazil"
+        "name": "Maman"
     }
 ];
 
