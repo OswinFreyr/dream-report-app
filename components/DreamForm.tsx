@@ -103,6 +103,7 @@ export default function DreamForm() {
         <TextInput
           label="Rentrez un titre à votre rêve"
           value={dreamTitle}
+          mode="outlined"
           onChangeText={(text) => setDreamTitle(text)}
         />
         <TextInput

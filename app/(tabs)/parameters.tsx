@@ -63,7 +63,6 @@ export default function Parameters() {
         <List.Section>
           <List.Accordion
             title={categorie !== "" ? categorie : "Sélectionner une catégorie"}
-            left={(props) => <List.Icon {...props} icon="folder" />}
             expanded={expanded}
             onPress={handlePress}
           >
@@ -84,6 +83,7 @@ export default function Parameters() {
         <TextInput
           label="Intitulé"
           value={text}
+          mode="outlined"
           onChangeText={(text) => setText(text)}
         />
         <Button
