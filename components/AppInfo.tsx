@@ -63,7 +63,7 @@ export default function AppInfo({ path }: { path: string }) {
           lightColor="rgba(0,0,0,0.8)"
           darkColor="rgba(255,255,255,0.8)">
           N'oubliez pas, il est important d'être assidu pour obtenir la meilleure expérience possible ! 
-          En effet, dans l'intimité du sommeil, nos esprits s'évadent dans des mondes oniriques, riches en symboles et en émotions. Pour capturer ces fragments de notre être intérieur, le journal de rêves devient un allié précieux. Chaque nuit, il nous guide à travers les dédales de l'inconscient, révélant des motifs récurrents, des désirs enfouis et des énigmes à résoudre. Au réveil, ces pages deviennent des miroirs de notre âme, nourrissant notre créativité et notre exploration de soi. En somme, le journal de rêves est bien plus qu'un simple recueil de souvenirs nocturnes ; il est le portail vers notre monde intérieur, un compagnon de voyage au cœur de l'inconnu. 
+          En effet, dans l'intimité du sommeil, nos esprits s'évadent dans des mondes oniriques, riches en symboles et en émotions. Pour capturer ces fragments de notre être intérieur, le journal de rêves devient un allié précieux. Chaque nuit, il nous guide à travers les dédales de l'inconscient, révélant des motifs récurrents, des désirs enfouis et des énigmes à résoudre. 
         </Text>
         <Text
           style={styles.infosTextB}
