@@ -90,8 +90,8 @@ export default function DreamAnalysis() {
     const entryList = [...conceptsList, ...entitiesList];
     return (
       <ScrollView style={styles.scrollView}>
-        <Text style={{ fontWeight: "bold", marginBottom: 10 }}>
-          Tableau des données :
+        <Text style={{ marginBottom: 10 }}>
+          Analyse du rêve :
         </Text>
         <View style={{ flexDirection: "row", marginBottom: 5 }}>
           <Text style={styles.tableHeader}>Type d'Entrée</Text>
@@ -124,13 +124,12 @@ export default function DreamAnalysis() {
         renderItem={renderItem}
         keyExtractor={(item, index) => index.toString()}
       />
-      <Button
+      {/* <Button
         title="Effectuer la requête à MeaningCloud"
         onPress={() => handleDreamSubmission("Nouveau rêve", "Contenu du nouveau rêve")}
-      />
+      /> */}
       {apiResponse && (
         <View>
-          <Text>Réponse de l'API :</Text>
           {renderTable()}
         </View>
       )}

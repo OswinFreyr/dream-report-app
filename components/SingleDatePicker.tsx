@@ -38,7 +38,7 @@ export default function SingleDatePicker({ setDate, date }) {
   const onConfirmSingle = useCallback(
     (params) => {
       setOpen(false);
-      params.setDate(params.date);
+      setDate(params.date);
     },
     [setOpen, setDate]
   );
