@@ -10,6 +10,7 @@ import {
 } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 // import { API_KEY, API_URL } from '@env';
+import { useIsFocused } from "@react-navigation/native";
 
 
 export default function DreamAnalysis() {
@@ -18,26 +19,32 @@ export default function DreamAnalysis() {
   const [filteredDreams, setFilteredDreams] = useState([]);
   const [searchText, setSearchText] = useState("");
 
-  useEffect(() => {
-    fetchDreamsFromStorage();
-  }, []);
+  const isFocused = useIsFocused();
 
-  const fetchDreamsFromStorage = async () => {
-    try {
-      const dreamFormDataArray = await AsyncStorage.getItem(
-        "dreamFormDataArray"
-      );
-      if (dreamFormDataArray) {
-        const formDataArray = JSON.parse(dreamFormDataArray);
-        setDreams(formDataArray);
-        setFilteredDreams(formDataArray);
-      } else {
-        console.error("No dream data found in AsyncStorage.");
+  useEffect(() => {
+    const fetchDreamsFromStorage = async () => {
+      try {
+        const dreamFormDataArray = await AsyncStorage.getItem(
+          "dreamFormDataArray"
+        );
+        if (dreamFormDataArray) {
+          const formDataArray = JSON.parse(dreamFormDataArray);
+          setDreams(formDataArray);
+          setFilteredDreams(formDataArray);
+        } else {
+          console.error("No dream data found in AsyncStorage.");
+        }
+      } catch (error) {
+        console.error("Error fetching dream data from AsyncStorage:", error);
       }
-    } catch (error) {
-      console.error("Error fetching dream data from AsyncStorage:", error);
+    };
+
+    if(isFocused){
+      fetchDreamsFromStorage();
     }
-  };
+
+  }, [isFocused]);
+
 
   useEffect(() => {
     setFilteredDreams(
@@ -59,9 +66,9 @@ export default function DreamAnalysis() {
 
   const handleApiRequest = async (dreamText) => {
     try {
-      const apiUrl = API_URL;
+      const apiUrl = process.env.EXPO_PUBLIC_API_URL;
       const language = "fr";
-      const apiKey = API_KEY;
+      const apiKey = process.env.EXPO_PUBLIC_API_KEY;
       const formdata = new FormData();
       formdata.append("key", apiKey);
       formdata.append("txt", dreamText);
@@ -119,7 +126,7 @@ export default function DreamAnalysis() {
     <View style={styles.container}>
       <TextInput
         style={styles.searchInput}
-        placeholder="Search for a dream..."
+        placeholder="Rechercher un rêve :"
         onChangeText={handleSearch}
         value={searchText}
       />
