@@ -112,7 +112,7 @@ export default function DreamForm() {
           mode="outlined"
           multiline
           numberOfLines={6}
-          style={[styles.input, { width: width * 0.8 }]}
+          style={[styles.input, ]}
         />
         <View style={styles.checkboxContainer}>
           <Switch value={isLucidDream} onValueChange={onToggleSwitch} />
