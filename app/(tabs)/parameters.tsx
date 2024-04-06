@@ -1,6 +1,5 @@
 import { StyleSheet } from "react-native";
 import * as React from "react";
-import { Button } from "react-native-paper";
 import { useState } from "react";
 import { View, Text } from "react-native";
 import { List, TextInput } from "react-native-paper";
@@ -8,6 +7,7 @@ import { addPerson } from "@/datas/People";
 import { addFeeling } from "@/datas/Feelings";
 import { addTheme } from "@/datas/Themes";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { Dialog, Portal, Button } from "react-native-paper";
 
 function addElement(categorie, text) {
   if (categorie === "Personne") {
@@ -25,6 +25,7 @@ export default function Parameters() {
   const [text, setText] = useState("");
   const [categorie, setCategorie] = useState("");
   const [expanded, setExpanded] = useState(false);
+  const [dialogVisible, setDialogVisible] = useState(false);
 
   const handlePress = () => setExpanded(!expanded);
 
@@ -43,6 +44,7 @@ export default function Parameters() {
     try {
       await AsyncStorage.removeItem("dreamFormDataArray");
       console.log("AsyncStorage vidé avec succès.");
+      setDialogVisible(true);
     } catch (error) {
       console.error("Erreur lors de la suppression de l'AsyncStorage :", error);
     }
@@ -83,13 +85,34 @@ export default function Parameters() {
           value={text}
           onChangeText={(text) => setText(text)}
         />
-        <Button style={{marginTop: 20}} mode="contained" onPress={handleAddElement}>
+        <Button
+          style={{ marginTop: 20 }}
+          mode="contained"
+          onPress={handleAddElement}
+        >
           Ajouter
         </Button>
       </View>
       <View style={styles.buttonContainer}>
-        <Button mode="contained" onPress={handleClearAsyncStorage}> Vider Async Storage</Button>
+        <Button mode="contained" onPress={handleClearAsyncStorage}>
+          {" "}
+          Vider Async Storage
+        </Button>
       </View>
+      <Portal>
+        <Dialog
+          visible={dialogVisible}
+          onDismiss={() => setDialogVisible(false)}
+        >
+          <Dialog.Title>AsyncStorage vidé</Dialog.Title>
+          <Dialog.Content>
+            <Text>L'AsyncStorage a été vidé avec succès.</Text>
+          </Dialog.Content>
+          <Dialog.Actions>
+            <Button onPress={() => setDialogVisible(false)}>OK</Button>
+          </Dialog.Actions>
+        </Dialog>
+      </Portal>
     </View>
   );
 }
@@ -122,7 +145,7 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
   buttonContainer: {
-    marginTop: 20, 
+    marginTop: 20,
     width: "100%",
     backgroundColor: "#fff",
     borderRadius: 10,
