@@ -59,6 +59,7 @@ export default function Parameters() {
       />
 
       <View style={styles.formContainer}>
+        <Text>Ajouter un élément</Text>
         <List.Section>
           <List.Accordion
             title={categorie !== "" ? categorie : "Sélectionner une catégorie"}
