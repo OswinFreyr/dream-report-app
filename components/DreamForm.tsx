@@ -8,6 +8,8 @@ import { People } from "@/datas/People";
 import { Feelings } from "@/datas/Feelings";
 import { Themes } from "@/datas/Themes";
 
+import { useIsFocused } from '@react-navigation/native';
+
 const { width } = Dimensions.get("window");
 
 export default function DreamForm() {
@@ -20,24 +22,29 @@ export default function DreamForm() {
   const [themes, setThemes] = useState([]);
   const [tabInfos, setTabInfos] = useState([]);
 
+  const isFocused = useIsFocused()
+
   useEffect(() => {
     const getPeopleData = async () => {
       const peopleInfo = People.map((e) => e.name);
       setPeople(peopleInfo);
     };
-    getPeopleData();
     const getFeelingsData = async () => {
       const feelingsInfo = Feelings.map((e) => e.name);
       setFeelings(feelingsInfo);
     };
-    getFeelingsData();
     const getThemesData = async () => {
       const themesInfo = Themes.map((e) => e.name);
       setThemes(themesInfo);
     };
-    getThemesData();
-  }, []);
-
+    if(isFocused) {
+      getPeopleData();
+      getFeelingsData();
+      getThemesData();
+    }
+  }, [isFocused]);
+  
+  
   const onToggleSwitch = () => setIsLucidDream(!isLucidDream);
 
   const handleDreamSubmission = async () => {
@@ -90,7 +97,7 @@ export default function DreamForm() {
         <View style={styles.checkboxContainer}>
           <Switch value={isLucidDream} onValueChange={onToggleSwitch} />
           <Text style={{ color: "black" }}>Rêve Lucide</Text>
-          <SingleDatePicker setDate={setDate} date={date}/>
+          <SingleDatePicker date={date} />
         </View>
         <Text style={{ color: "black" }}>Personnes</Text>
         <View style={styles.choicesContainer}>

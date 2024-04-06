@@ -19,7 +19,6 @@ export default function TabAstuces() {
         const getAstucesData = async () => {    
             let rand = Math.random() * Astuces.length;
             rand = Math.trunc(rand);
-    
             setTitle(Astuces[rand].title);
             setContent(Astuces[rand].content);
         }

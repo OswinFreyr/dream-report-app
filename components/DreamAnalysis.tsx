@@ -7,7 +7,7 @@ export default function DreamAnalysis() {
     try {
       const apiUrl = "https://api.meaningcloud.com/topics-2.0";
       const language = "fr";
-      const tmpDream = "Un truc important s'est passé avec gérard";
+      const tmpDream = "Afida Turner se retrouve soudainement en compétition avec Driss Homet pour décrocher le dernier pot de crème glacée dans un désert mystérieux. Alors qu'ils se précipitent pour l'attraper, le pot semble acquérir des jambes et commence à danser en criant des blagues, les laissant perplexes dans une folie hilarante où la crème glacée devient leur adversaire le plus redoutable.";
       const apiKey = "bcd1ea9fc7ab51e2bc69736e28d91941";
       const formdata = new FormData();
       formdata.append("key", apiKey);
