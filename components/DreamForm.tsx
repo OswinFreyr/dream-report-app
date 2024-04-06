@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   StyleSheet,
@@ -7,7 +7,7 @@ import {
   KeyboardAvoidingView,
   Platform,
 } from "react-native";
-import { TextInput, Button, Switch, Text } from "react-native-paper";
+import { TextInput, Button, Switch, Text, Dialog } from "react-native-paper";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import SingleDatePicker from "@/components/SingleDatePicker";
 import ChipChoice from "@/components/ChipChoice";
@@ -28,6 +28,7 @@ export default function DreamForm() {
   const [feelings, setFeelings] = useState([]);
   const [themes, setThemes] = useState([]);
   const [tabInfos, setTabInfos] = useState([]);
+  const [dialogVisible, setDialogVisible] = useState(false);
 
   const isFocused = useIsFocused();
 
@@ -49,14 +50,14 @@ export default function DreamForm() {
       getFeelingsData();
       getThemesData();
     }
-    // handleDreamSubmission();
+    handleDreamSubmission();
   }, [isFocused]);
 
   const onToggleSwitch = () => setIsLucidDream(!isLucidDream);
 
   const handleDreamSubmission = async () => {
     if (!dreamTitle || !dreamText || !date) {
-      console.log("Veuillez remplir tous les champs obligatoires.");
+      setDialogVisible(true);
       return;
     }
 
@@ -99,12 +100,12 @@ export default function DreamForm() {
         keyboardShouldPersistTaps="handled"
       >
         <TextInput
-          label="Rentrez un titre à votre rêve *"
+          label="Rentrez un titre à votre rêve"
           value={dreamTitle}
           onChangeText={(text) => setDreamTitle(text)}
         />
         <TextInput
-          label="Rêve *"
+          label="Rêve"
           value={dreamText}
           onChangeText={(text) => setDreamText(text)}
           mode="outlined"
@@ -146,6 +147,17 @@ export default function DreamForm() {
           Reset Dreams
         </Button>
       </ScrollView>
+      <Dialog visible={dialogVisible} onDismiss={() => setDialogVisible(false)}>
+        <Dialog.Title>Champs obligatoires manquants</Dialog.Title>
+        <Dialog.Content>
+          <Text>Veuillez remplir tous les champs obligatoires. (*)</Text>
+        </Dialog.Content>
+        <Dialog.Actions>
+          <Button onPress={() => setDialogVisible(false)}>
+            J'ai compris !
+          </Button>
+        </Dialog.Actions>
+      </Dialog>
     </KeyboardAvoidingView>
   );
 }
