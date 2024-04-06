@@ -28,6 +28,7 @@ const AstuceCard = ({ astuce }) => (
         </Card.Content>
       </Card>
     </ScrollView>
+    
   </KeyboardAvoidingView>
 );
 
