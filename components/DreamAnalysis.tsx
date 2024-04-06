@@ -11,6 +11,11 @@ import {
 } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
+
+import { API_KEY, API_URL } from '../';
+
+
+
 export default function DreamAnalysis() {
   const [apiResponse, setApiResponse] = useState(null);
   const [dreams, setDreams] = useState([]);
@@ -75,11 +80,11 @@ export default function DreamAnalysis() {
 
   const handleApiRequest = async (dreamText) => {
     try {
-      const apiUrl = "https://api.meaningcloud.com/topics-2.0";
+      // const apiUrl = "https://api.meaningcloud.com/topics-2.0";
       const language = "fr";
-      const apiKey = "bcd1ea9fc7ab51e2bc69736e28d91941";
+      // const apiKey = "bcd1ea9fc7ab51e2bc69736e28d91941";
       const formdata = new FormData();
-      formdata.append("key", apiKey);
+      formdata.append("key", API_KEY);
       formdata.append("txt", dreamText);
       formdata.append("lang", language);
       const requestOptions = {
@@ -88,7 +93,7 @@ export default function DreamAnalysis() {
         redirect: "follow",
       };
       console.log("dream text : " + dreamText);
-      const response = await fetch(apiUrl, requestOptions);
+      const response = await fetch(API_URL, requestOptions);
       const responseData = await response.json();
       setApiResponse(responseData);
       console.log("Réponse de l'API MeaningCloud :", responseData);
