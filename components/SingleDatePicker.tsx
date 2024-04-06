@@ -46,7 +46,12 @@ export default function SingleDatePicker({ setDate, date }) {
   return (
     <SafeAreaProvider>
       <View style={{ justifyContent: "center", flex: 1, alignItems: "center" }}>
-        <Button onPress={() => setOpen(true)} uppercase={false} mode="outlined">
+        <Button
+          mode="contained"
+          onPress={() => setOpen(true)}
+          uppercase={false}
+          // mode="outlined"
+        >
           Choisir une date *
         </Button>
         {date && <Text style={{ color: "black" }}> {date.toDateString()}</Text>}

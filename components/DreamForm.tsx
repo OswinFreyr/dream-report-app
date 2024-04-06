@@ -50,7 +50,6 @@ export default function DreamForm() {
       getFeelingsData();
       getThemesData();
     }
-    handleDreamSubmission();
   }, [isFocused]);
 
   const onToggleSwitch = () => setIsLucidDream(!isLucidDream);
@@ -79,15 +78,17 @@ export default function DreamForm() {
         "AsyncStorage:",
         await AsyncStorage.getItem("dreamFormDataArray")
       );
+
+      // Réinitialiser les champs et le dialogue après la soumission réussie
+      setDreamTitle("");
+      setDreamText("");
+      setIsLucidDream(false);
+      setDate(undefined);
+      setTabInfos([]);
+      setDialogVisible(false); // Fermer le dialogue si soumission réussie
     } catch (error) {
       console.error("Error saving data:", error);
     }
-
-    setDreamTitle("");
-    setDreamText("");
-    setIsLucidDream(false);
-    setDate(undefined);
-    setTabInfos([]);
   };
 
   return (
@@ -115,7 +116,7 @@ export default function DreamForm() {
         />
         <View style={styles.checkboxContainer}>
           <Switch value={isLucidDream} onValueChange={onToggleSwitch} />
-          <Text style={{ color: "black" }}>Rêve Lucide</Text>
+          <Text style={{ color: "black", marginLeft: 5 }}>Rêve Lucide</Text>
           <SingleDatePicker date={date} setDate={setDate} />
         </View>
         <Text style={{ color: "black" }}>Personnes</Text>
