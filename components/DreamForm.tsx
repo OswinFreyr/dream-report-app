@@ -103,7 +103,7 @@ export default function DreamForm() {
         <View style={styles.checkboxContainer}>
           <Switch value={isLucidDream} onValueChange={onToggleSwitch} />
           <Text style={{ color: "black" }}>Rêve Lucide</Text>
-          <SingleDatePicker date={date} />
+          <SingleDatePicker setDate={setDate} date={date} />
         </View>
         <Text style={{ color: "black" }}>Personnes</Text>
         <View style={styles.choicesContainer}>
