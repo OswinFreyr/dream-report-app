@@ -34,7 +34,9 @@ export default function DreamForm() {
   const [people, setPeople] = useState([]);
   const [feelings, setFeelings] = useState([]);
   const [themes, setThemes] = useState([]);
-  const [tabInfos, setTabInfos] = useState([]);
+  const [tabInfosPeople, setTabInfosPeople] = useState([]);
+  const [tabInfosThemes, setTabInfosThemes] = useState([]);
+  const [tabInfosFeelings, setTabInfosFeelings] = useState([]);
   const [dialogVisible, setDialogVisible] = useState(false);
   const [snackbarVisible, setSnackbarVisible] = useState(false);
 
@@ -71,12 +73,20 @@ export default function DreamForm() {
     try {
       const existingData = await AsyncStorage.getItem("dreamFormDataArray");
       const formDataArray = existingData ? JSON.parse(existingData) : [];
+      console.log(`people: `);
+      console.log(tabInfosPeople);
+      console.log(`themes:`);
+      console.log(tabInfosThemes);
+      console.log(`people: `);
+      console.log(tabInfosFeelings);
       formDataArray.push({
         dreamTitle,
         dreamText,
         date,
         isLucidDream,
-        tabInfos,
+        tabInfosPeople,
+        tabInfosThemes,
+        tabInfosFeelings,
       });
       await AsyncStorage.setItem(
         "dreamFormDataArray",
@@ -88,7 +98,9 @@ export default function DreamForm() {
       setDreamText("");
       setIsLucidDream(false);
       setDate("");
-      setTabInfos([]);
+      setTabInfosPeople([]);
+      setTabInfosThemes([]);
+      setTabInfosFeelings([]);
       setDialogVisible(false);
       setSnackbarVisible(true);
     } catch (error) {
@@ -138,19 +150,19 @@ export default function DreamForm() {
         <Text style={{ color: "black" }}>Personnes</Text>
         <View style={styles.choicesContainer}>
           {people.map((name, index) => (
-            <ChipChoice key={index} content={name} tabInfos={tabInfos} />
+            <ChipChoice key={index} content={name} tabInfos={tabInfosPeople} />
           ))}
         </View>
         <Text style={{ color: "black" }}>Thématiques</Text>
         <View style={styles.choicesContainer}>
           {themes.map((name, index) => (
-            <ChipChoice key={index} content={name} tabInfos={tabInfos} />
+            <ChipChoice key={index} content={name} tabInfos={tabInfosThemes} />
           ))}
         </View>
         <Text style={{ color: "black" }}>Émotions</Text>
         <View style={styles.choicesContainer}>
           {feelings.map((name, index) => (
-            <ChipChoice key={index} content={name} tabInfos={tabInfos} />
+            <ChipChoice key={index} content={name} tabInfos={tabInfosFeelings} />
           ))}
         </View>
         <Button
