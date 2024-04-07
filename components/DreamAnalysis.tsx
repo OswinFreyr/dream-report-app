@@ -32,11 +32,12 @@ export default function DreamAnalysis() {
           setDreams(formDataArray);
           setFilteredDreams(formDataArray);
           setShowMoreButton(formDataArray.length > 4);
-        } else {
-          console.error("Aucun rêve trouvé dans l'Async Storage.");
         }
+        // else {
+        // console.error("Aucun rêve trouvé dans l'Async Storage.");
+        // }
       } catch (error) {
-        console.error("Erreur fetch:", error);
+        // console.error("Erreur fetch:", error);
       }
     };
 
@@ -79,10 +80,9 @@ export default function DreamAnalysis() {
       };
       const response = await fetch(apiUrl, requestOptions);
       const responseData = await response.json();
-      console.log(responseData);
       setApiResponse(responseData);
     } catch (error) {
-      console.error("Erreur requête vers MeaningCloud API:", error);
+      // console.error("Erreur requête vers MeaningCloud API:", error);
     }
   };
 
@@ -127,7 +127,7 @@ export default function DreamAnalysis() {
             <Text style={styles.tableCell}>{entry.relevance}</Text>
             <Text style={styles.tableCell}>{entry.form}</Text>
             <Text style={styles.tableCell}>
-              {entry.sementity?.type && entry.sementity.type.split('>')[1]}
+              {entry.sementity?.type && entry.sementity.type.split(">")[1]}
             </Text>
           </View>
         ))}

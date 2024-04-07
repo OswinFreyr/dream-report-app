@@ -43,7 +43,6 @@ export default function Parameters() {
   const handleClearAsyncStorage = async () => {
     try {
       await AsyncStorage.removeItem("dreamFormDataArray");
-      console.log("AsyncStorage vidé avec succès.");
       setDialogVisible(true);
     } catch (error) {
       console.error("Erreur lors de la suppression de l'AsyncStorage :", error);

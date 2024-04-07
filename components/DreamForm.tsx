@@ -82,8 +82,6 @@ export default function DreamForm() {
         "dreamFormDataArray",
         JSON.stringify(formDataArray)
       );
-      console.log(formDataArray);
-
       setDreamTitle("");
       setDreamText("");
       setIsLucidDream(false);
