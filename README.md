@@ -35,7 +35,7 @@ You can now add your code to the project !
 ## Starting the project
 To start use the command `npx expo` at the root of your project and then follow the informations listed in your terminal.
 
-# Strucuture
+# Structure
 The application is a single-page application and is composed of 5 tabs.
 #### index
 The home page is the form where you write your dreams (title of your dream, main content and date of the dream) and add if needed if the dream was lucid and some informations with the different lists. When sent your dream is stored in the async storage of your device. For now, the selected infos in the lists are not resetted, this will be adressed in a future update.
