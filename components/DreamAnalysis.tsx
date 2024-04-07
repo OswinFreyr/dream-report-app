@@ -18,6 +18,9 @@ export default function DreamAnalysis() {
   const [searchText, setSearchText] = useState("");
   const [showAllDreams, setShowAllDreams] = useState(false);
   const [showMoreButton, setShowMoreButton] = useState(false);
+  const [tabInfosPeople, setTabInfosPeople] = useState([]);
+  const [tabInfosThemes, setTabInfosThemes] = useState([]);
+  const [tabInfosFeelings, setTabInfosFeelings] = useState([]);
 
   const isFocused = useIsFocused();
 
@@ -32,9 +35,10 @@ export default function DreamAnalysis() {
           setDreams(formDataArray);
           setFilteredDreams(formDataArray);
           setShowMoreButton(formDataArray.length > 4);
-        } else {
-          console.error("Aucun rêve trouvé dans l'Async Storage.");
         }
+        // else {
+        // console.error("Aucun rêve trouvé dans l'Async Storage.");
+        // }
       } catch (error) {
         console.error("Erreur fetch:", error);
       }
@@ -61,6 +65,18 @@ export default function DreamAnalysis() {
   const handleDreamSelection = (index) => {
     const selectedDream = filteredDreams[index];
     handleApiRequest(selectedDream.dreamText);
+    const peopleContent = selectedDream.tabInfosPeople.map(
+      (person) => person.content
+    );
+    const themesContent = selectedDream.tabInfosThemes.map(
+      (theme) => theme.content
+    );
+    const feelingsContent = selectedDream.tabInfosFeelings.map(
+      (feeling) => feeling.content
+    );
+    setTabInfosPeople(peopleContent);
+    setTabInfosThemes(themesContent);
+    setTabInfosFeelings(feelingsContent);
   };
 
   const handleApiRequest = async (dreamText) => {
@@ -79,10 +95,9 @@ export default function DreamAnalysis() {
       };
       const response = await fetch(apiUrl, requestOptions);
       const responseData = await response.json();
-      console.log(responseData);
       setApiResponse(responseData);
     } catch (error) {
-      console.error("Erreur requête vers MeaningCloud API:", error);
+      // console.error("Erreur requête vers MeaningCloud API:", error);
     }
   };
 
@@ -127,10 +142,47 @@ export default function DreamAnalysis() {
             <Text style={styles.tableCell}>{entry.relevance}</Text>
             <Text style={styles.tableCell}>{entry.form}</Text>
             <Text style={styles.tableCell}>
-              {entry.sementity?.type && entry.sementity.type.split('>')[1]}
+              {entry.sementity?.type && entry.sementity.type.split(">")[1]}
             </Text>
           </View>
         ))}
+          <Text style={styles.analysisHeader}>
+            Analyse des infos supplémentaires :
+          </Text>
+        <View style={{ display: "flex", flexDirection: "row" , justifyContent: "center"}}>
+          <View style={{ display: "flex", flexDirection: "column" }}>
+            <View style={styles.tableHeaderContainer}>
+              <Text style={styles.tableHeader}>Personnes</Text>
+            </View>
+            {tabInfosPeople.map((person, index) => (
+              <View key={index} style={styles.tableRow}>
+                <Text style={styles.tableCell}>{person}</Text>
+              </View>
+            ))}
+          </View>
+
+          <View style={{ display: "flex", flexDirection: "column" }}>
+            <View style={styles.tableHeaderContainer}>
+              <Text style={styles.tableHeader}>Thèmes</Text>
+            </View>
+            {tabInfosThemes.map((theme, index) => (
+              <View key={index} style={styles.tableRow}>
+                <Text style={styles.tableCell}>{theme}</Text>
+              </View>
+            ))}
+          </View>
+
+          <View style={{ display: "flex", flexDirection: "column" }}>
+            <View style={styles.tableHeaderContainer}>
+              <Text style={styles.tableHeader}>Émotions</Text>
+            </View>
+            {tabInfosFeelings.map((feeling, index) => (
+              <View key={index} style={styles.tableRow}>
+                <Text style={styles.tableCell}>{feeling}</Text>
+              </View>
+            ))}
+          </View>
+        </View>
       </View>
     );
   };
@@ -189,6 +241,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     fontSize: 20,
     fontWeight: "bold",
+    marginTop: 20
   },
   tableHeaderContainer: {
     flexDirection: "row",
