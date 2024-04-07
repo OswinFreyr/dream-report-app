@@ -99,7 +99,7 @@ export default function DreamAnalysis() {
     const entryList = [...conceptsList, ...entitiesList];
     return (
       <ScrollView style={styles.scrollView}>
-        <Text style={{ marginBottom: 10 }}>Dream Analysis:</Text>
+        <Text style={{ marginBottom: 10 }}>Analyse de votre rêve :</Text>
         <View style={{ flexDirection: "row", marginBottom: 5 }}>
           <Text style={styles.tableHeader}>Entry Type</Text>
           <Text style={styles.tableHeader}>Relevance</Text>
