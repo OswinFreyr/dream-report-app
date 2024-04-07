@@ -17,6 +17,7 @@ export default function DreamAnalysis() {
   const [filteredDreams, setFilteredDreams] = useState([]);
   const [searchText, setSearchText] = useState("");
   const [showAllDreams, setShowAllDreams] = useState(false);
+  const [showMoreButton, setShowMoreButton] = useState(false);
 
   const isFocused = useIsFocused();
 
@@ -30,11 +31,12 @@ export default function DreamAnalysis() {
           const formDataArray = JSON.parse(dreamFormDataArray);
           setDreams(formDataArray);
           setFilteredDreams(formDataArray);
+          setShowMoreButton(formDataArray.length > 4);
         } else {
-          console.error("No dream data found in AsyncStorage.");
+          console.error("Aucun rêve trouvé dans l'Async Storage.");
         }
       } catch (error) {
-        console.error("Error fetching dream data from AsyncStorage:", error);
+        console.error("Erreur fetch:", error);
       }
     };
 
@@ -49,6 +51,7 @@ export default function DreamAnalysis() {
         dream.dreamTitle.toLowerCase().includes(searchText.toLowerCase())
       )
     );
+    setShowMoreButton(filteredDreams.length > 4);
   }, [dreams, searchText]);
 
   const handleSearch = (text) => {
@@ -78,8 +81,18 @@ export default function DreamAnalysis() {
       const responseData = await response.json();
       setApiResponse(responseData);
     } catch (error) {
-      console.error("Error making request to MeaningCloud API:", error);
+      console.error("Erreur requête vers MeaningCloud API:", error);
     }
+  };
+
+  const handleShowLess = () => {
+    setShowAllDreams(false);
+    setShowMoreButton(filteredDreams.length > 4);
+  };
+
+  const handleShowMore = () => {
+    setShowAllDreams(true);
+    setShowMoreButton(false);
   };
 
   const renderItem = ({ item, index }) => {
@@ -101,7 +114,7 @@ export default function DreamAnalysis() {
     const entitiesList = apiResponse.entity_list;
     const entryList = [...conceptsList, ...entitiesList];
     return (
-      <View style={styles.scrollView}>
+      <View>
         <Text style={styles.analysisHeader}>Analyse de votre rêve :</Text>
         <View style={styles.tableHeaderContainer}>
           <Text style={styles.tableHeader}>Type</Text>
@@ -134,9 +147,14 @@ export default function DreamAnalysis() {
         renderItem={renderItem}
         keyExtractor={(item, index) => index.toString()}
       />
-      {!showAllDreams && filteredDreams.length > 4 && (
-        <TouchableOpacity onPress={() => setShowAllDreams(true)}>
-          <Text style={styles.showMoreButton}>Voir plus</Text>
+      {showMoreButton && !showAllDreams && filteredDreams.length > 4 && (
+        <TouchableOpacity onPress={handleShowMore}>
+          <Text style={styles.showMoreButton}>Afficher plus</Text>
+        </TouchableOpacity>
+      )}
+      {showAllDreams && (
+        <TouchableOpacity onPress={handleShowLess}>
+          <Text style={styles.showMoreButton}>Afficher moins</Text>
         </TouchableOpacity>
       )}
       {apiResponse && <View style={{ marginTop: 40 }}>{renderTable()}</View>}
@@ -151,9 +169,8 @@ const styles = StyleSheet.create({
   },
   searchInput: {
     height: 40,
-    borderWidth: 1,
+    borderBottomWidth: 1,
     borderColor: "#ccc",
-    borderRadius: 5,
     paddingHorizontal: 10,
     marginBottom: 20,
     color: "grey",
@@ -193,8 +210,13 @@ const styles = StyleSheet.create({
   },
   showMoreButton: {
     marginTop: 10,
+    marginBottom: 20,
+    paddingVertical: 10,
+    backgroundColor: "#d0bcff",
+    borderRadius: 20,
     textAlign: "center",
-    color: "blue",
-    textDecorationLine: "underline",
+    color: "black", 
+    fontWeight: "bold", 
   },
+  
 });
