@@ -58,7 +58,6 @@ export default function DreamAnalysis() {
   };
 
   const handleDreamSelection = (index) => {
-    console.log("Index of selected dream:", index);
     const selectedDream = filteredDreams[index];
     handleApiRequest(selectedDream.dreamText);
   };
@@ -77,11 +76,9 @@ export default function DreamAnalysis() {
         body: formdata,
         redirect: "follow",
       };
-      console.log("Dream text:", dreamText);
       const response = await fetch(apiUrl, requestOptions);
       const responseData = await response.json();
       setApiResponse(responseData);
-      console.log("MeaningCloud API response:", responseData);
     } catch (error) {
       console.error("Error making request to MeaningCloud API:", error);
     }
@@ -125,7 +122,7 @@ export default function DreamAnalysis() {
     <View style={styles.container}>
       <TextInput
         style={styles.searchInput}
-        placeholder="Rechercher un rêve :"
+        placeholder="Rechercher un rêve "
         onChangeText={handleSearch}
         value={searchText}
       />
@@ -152,6 +149,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     paddingHorizontal: 10,
     marginBottom: 20,
+    color : "grey"
   },
   item: {
     padding: 10,
