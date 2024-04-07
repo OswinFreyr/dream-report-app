@@ -19,12 +19,16 @@ const ChipChoice = ({ content, tabInfos }) => {
 
   return (
     <Chip
-      // icon="information"
       onPress={handlePress}
       style={{
         backgroundColor: isPressed ? "#d0bcff" : "#ab9ccf",
         marginRight: 5,
         marginTop: 5,
+        elevation: 5, 
+        shadowColor: "black", 
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.3,
+        shadowRadius: 2,
       }}
       textStyle={{ color: isPressed ? "gray" : "white" }}
     >

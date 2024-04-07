@@ -83,7 +83,6 @@ export default function DreamForm() {
         JSON.stringify(formDataArray)
       );
       console.log(formDataArray);
-      
 
       setDreamTitle("");
       setDreamText("");
@@ -200,6 +199,11 @@ const styles = StyleSheet.create({
   button: {
     marginTop: 8,
     marginBottom: 8,
+    elevation: 5,
+    shadowColor: "black",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.3,
+    shadowRadius: 2,
   },
   choicesContainer: {
     flexDirection: "row",

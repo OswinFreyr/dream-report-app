@@ -107,7 +107,7 @@ export default function Parameters() {
         >
           <Dialog.Title>Rêves supprimés</Dialog.Title>
           <Dialog.Content>
-            <Text style={{color : "white"}}>
+            <Text style={{color : "white", textAlign : "justify"}}>
               Vous avez supprimé non seulement les rêves enregistrés, mais aussi
               vos espoirs et aspirations. Vous n'aurez plus que le réveil comme
               compagnon de voyage vers la réalité. Bonne chance !

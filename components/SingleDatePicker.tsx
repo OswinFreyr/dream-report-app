@@ -41,7 +41,7 @@ export default function SingleDatePicker({ setDate, date }) {
       const year = params.date.getFullYear();
       const month = params.date.getMonth() + 1;
       const day = params.date.getDate();
-      params.date = year + "-" + month + "-" + day
+      params.date = year + "-" + month + "-" + day;
       setDate(params.date);
     },
     [setOpen, setDate]
@@ -54,7 +54,13 @@ export default function SingleDatePicker({ setDate, date }) {
           mode="contained"
           onPress={() => setOpen(true)}
           uppercase={false}
-          // mode="outlined"
+          style={{
+            elevation: 5,
+            shadowColor: "black",
+            shadowOffset: { width: 0, height: 2 },
+            shadowOpacity: 0.3,
+            shadowRadius: 2,
+          }}
         >
           Choisir une date *
         </Button>
