@@ -10,11 +10,11 @@ export default function AppInfo({ path }: { path: string }) {
       style={{ flex: 1 }}
     >
       <ScrollView
-        contentContainerStyle={styles.container}
+        // contentContainerStyle={styles.container}
         keyboardShouldPersistTaps="handled"
       >
     <View>
-      <View style={styles.getStartedContainer}>
+      <View>
         <Text
           style={styles.infosText}
           lightColor="rgba(0,0,0,0.8)"

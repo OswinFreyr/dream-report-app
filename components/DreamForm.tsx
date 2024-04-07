@@ -88,7 +88,7 @@ export default function DreamForm() {
       setDreamTitle("");
       setDreamText("");
       setIsLucidDream(false);
-      setDate(undefined);
+      setDate("");
       setTabInfos([]);
       setDialogVisible(false);
       setSnackbarVisible(true);
