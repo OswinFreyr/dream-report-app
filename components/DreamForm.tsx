@@ -30,7 +30,7 @@ export default function DreamForm() {
   const [dreamTitle, setDreamTitle] = useState("");
   const [dreamText, setDreamText] = useState("");
   const [isLucidDream, setIsLucidDream] = useState(false);
-  const [date, setDate] = useState(undefined);
+  const [date, setDate] = useState("");
   const [people, setPeople] = useState([]);
   const [feelings, setFeelings] = useState([]);
   const [themes, setThemes] = useState([]);
@@ -82,6 +82,8 @@ export default function DreamForm() {
         "dreamFormDataArray",
         JSON.stringify(formDataArray)
       );
+      console.log(formDataArray);
+      
 
       setDreamTitle("");
       setDreamText("");
