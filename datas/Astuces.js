@@ -19,7 +19,7 @@ export const Astuces = [
         "title": "Limitez la consommation de caféine et d'alcool",
         "content": "La caféine est un stimulant qui peut perturber le sommeil, alors évitez de consommer des boissons caféinées l'après-midi et le soir. L'alcool peut initialement vous aider à vous endormir, mais il peut perturber votre sommeil une fois que son effet relaxant diminue."
     }, {
-        "title ": "Éviter les repas lourds avant de se coucher",
+        "title": "Éviter les repas lourds avant de se coucher",
         "content": "Les repas copieux juste avant le coucher peuvent provoquer des brûlures d'estomac et une digestion difficile, ce qui peut perturber votre sommeil. Optez plutôt pour des repas légers et évitez de manger au moins deux à trois heures avant de vous coucher."
     },
     {
