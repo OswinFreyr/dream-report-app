@@ -32,7 +32,6 @@ export default function DreamAnalysis() {
         );
         if (dreamFormDataArray) {
           const formDataArray = JSON.parse(dreamFormDataArray);
-          console.log(formDataArray);
           setDreams(formDataArray);
           setFilteredDreams(formDataArray);
           setShowMoreButton(formDataArray.length > 4);
@@ -41,7 +40,7 @@ export default function DreamAnalysis() {
         // console.error("Aucun rêve trouvé dans l'Async Storage.");
         // }
       } catch (error) {
-        // console.error("Erreur fetch:", error);
+        console.error("Erreur fetch:", error);
       }
     };
 
@@ -147,40 +146,46 @@ export default function DreamAnalysis() {
             </Text>
           </View>
         ))}
-  
-        <Text style={styles.analysisHeader}>
-          Analyse des infos supplémentaires :
-        </Text>
-        <View style={styles.tableHeaderContainer}>
-          <Text style={styles.tableHeader}>Personnes</Text>
-          <Text style={styles.tableHeader}>Thèmes</Text>
-          <Text style={styles.tableHeader}>Émotions</Text>
+          <Text style={styles.analysisHeader}>
+            Analyse des infos supplémentaires :
+          </Text>
+        <View style={{ display: "flex", flexDirection: "row" , justifyContent: "center"}}>
+          <View style={{ display: "flex", flexDirection: "column" }}>
+            <View style={styles.tableHeaderContainer}>
+              <Text style={styles.tableHeader}>Personnes</Text>
+            </View>
+            {tabInfosPeople.map((person, index) => (
+              <View key={index} style={styles.tableRow}>
+                <Text style={styles.tableCell}>{person}</Text>
+              </View>
+            ))}
+          </View>
+
+          <View style={{ display: "flex", flexDirection: "column" }}>
+            <View style={styles.tableHeaderContainer}>
+              <Text style={styles.tableHeader}>Thèmes</Text>
+            </View>
+            {tabInfosThemes.map((theme, index) => (
+              <View key={index} style={styles.tableRow}>
+                <Text style={styles.tableCell}>{theme}</Text>
+              </View>
+            ))}
+          </View>
+
+          <View style={{ display: "flex", flexDirection: "column" }}>
+            <View style={styles.tableHeaderContainer}>
+              <Text style={styles.tableHeader}>Émotions</Text>
+            </View>
+            {tabInfosFeelings.map((feeling, index) => (
+              <View key={index} style={styles.tableRow}>
+                <Text style={styles.tableCell}>{feeling}</Text>
+              </View>
+            ))}
+          </View>
         </View>
-        {tabInfosPeople.map((person, index) => (
-          <View key={index} style={styles.tableRow}>
-            <Text style={styles.tableCell}>{person}</Text>
-            <Text style={styles.tableCell}></Text>
-            <Text style={styles.tableCell}></Text>
-          </View>
-        ))}
-        {tabInfosThemes.map((theme, index) => (
-          <View key={index} style={styles.tableRow}>
-            <Text style={styles.tableCell}></Text>
-            <Text style={styles.tableCell}>{theme}</Text>
-            <Text style={styles.tableCell}></Text>
-          </View>
-        ))}
-        {tabInfosFeelings.map((feeling, index) => (
-          <View key={index} style={styles.tableRow}>
-            <Text style={styles.tableCell}></Text>
-            <Text style={styles.tableCell}></Text>
-            <Text style={styles.tableCell}>{feeling}</Text>
-          </View>
-        ))}
       </View>
     );
   };
-  
 
   return (
     <ScrollView style={styles.container}>
@@ -236,6 +241,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     fontSize: 20,
     fontWeight: "bold",
+    marginTop: 20
   },
   tableHeaderContainer: {
     flexDirection: "row",

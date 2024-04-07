@@ -73,12 +73,6 @@ export default function DreamForm() {
     try {
       const existingData = await AsyncStorage.getItem("dreamFormDataArray");
       const formDataArray = existingData ? JSON.parse(existingData) : [];
-      console.log(`people: `);
-      console.log(tabInfosPeople);
-      console.log(`themes:`);
-      console.log(tabInfosThemes);
-      console.log(`people: `);
-      console.log(tabInfosFeelings);
       formDataArray.push({
         dreamTitle,
         dreamText,
