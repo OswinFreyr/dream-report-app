@@ -7,7 +7,14 @@ import {
   KeyboardAvoidingView,
   Platform,
 } from "react-native";
-import { TextInput, Button, Switch, Text, Dialog } from "react-native-paper";
+import {
+  TextInput,
+  Button,
+  Switch,
+  Text,
+  Dialog,
+  Snackbar,
+} from "react-native-paper";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import SingleDatePicker from "@/components/SingleDatePicker";
 import ChipChoice from "@/components/ChipChoice";
@@ -29,6 +36,7 @@ export default function DreamForm() {
   const [themes, setThemes] = useState([]);
   const [tabInfos, setTabInfos] = useState([]);
   const [dialogVisible, setDialogVisible] = useState(false);
+  const [snackbarVisible, setSnackbarVisible] = useState(false);
 
   const isFocused = useIsFocused();
 
@@ -75,18 +83,27 @@ export default function DreamForm() {
         JSON.stringify(formDataArray)
       );
 
-    
-
       setDreamTitle("");
       setDreamText("");
       setIsLucidDream(false);
       setDate(undefined);
       setTabInfos([]);
-      setDialogVisible(false); 
+      setDialogVisible(false);
+      setSnackbarVisible(true);
     } catch (error) {
       console.error("Error saving data:", error);
     }
   };
+
+  useEffect(() => {
+    let timeout;
+    if (snackbarVisible) {
+      timeout = setTimeout(() => {
+        setSnackbarVisible(false);
+      }, 3000);
+    }
+    return () => clearTimeout(timeout);
+  }, [snackbarVisible]);
 
   return (
     <KeyboardAvoidingView
@@ -110,7 +127,7 @@ export default function DreamForm() {
           mode="outlined"
           multiline
           numberOfLines={6}
-          style={[styles.input, ]}
+          style={[styles.input]}
         />
         <View style={styles.checkboxContainer}>
           <Switch value={isLucidDream} onValueChange={onToggleSwitch} />
@@ -142,7 +159,6 @@ export default function DreamForm() {
         >
           Soumettre
         </Button>
-        
       </ScrollView>
       <Dialog visible={dialogVisible} onDismiss={() => setDialogVisible(false)}>
         <Dialog.Title>Champs obligatoires manquants</Dialog.Title>
@@ -155,6 +171,13 @@ export default function DreamForm() {
           </Button>
         </Dialog.Actions>
       </Dialog>
+      <Snackbar
+        visible={snackbarVisible}
+        onDismiss={() => setSnackbarVisible(false)}
+        duration={3000}
+      >
+        Votre rêve a bien été enregistré !
+      </Snackbar>
     </KeyboardAvoidingView>
   );
 }
