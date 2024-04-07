@@ -215,8 +215,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#d0bcff",
     borderRadius: 20,
     textAlign: "center",
-    color: "black", 
-    fontWeight: "bold", 
+    color: "black",
+    fontWeight: "bold",
   },
-  
 });
