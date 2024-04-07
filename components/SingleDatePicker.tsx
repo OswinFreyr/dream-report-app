@@ -54,7 +54,6 @@ export default function SingleDatePicker({ setDate, date }) {
         const formattedDate = `${year}-${month}-${day}`;
         setDate(formattedDate);
       } else {
-        // Afficher la Snackbar si la date est ultérieure à aujourd'hui
         setSnackbarVisible(true);
         setTimeout(() => {
           setSnackbarVisible(false);
