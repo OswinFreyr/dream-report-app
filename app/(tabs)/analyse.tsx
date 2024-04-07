@@ -1,18 +1,20 @@
-import { StyleSheet, PermissionsAndroid } from "react-native";
+import { StyleSheet } from "react-native";
 
+import EditScreenInfo from "@/components/AppInfo";
 import { Text, View } from "@/components/Themed";
-import DreamForm from "@/components/DreamForm";
+import DreamList from "@/components/DreamList";
+import DreamAnalysis from "@/components/DreamAnalysis";
 
-export default function TabOneScreen() {
+export default function TabTests() {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Rêvélations : Le Journal Onirique</Text>
+      <Text style={styles.title}>Analysez vos rêves </Text>
       <View
         style={styles.separator}
         lightColor="#eee"
         darkColor="rgba(255,255,255,0.1)"
       />
-      <DreamForm />
+      <DreamAnalysis />
     </View>
   );
 }
