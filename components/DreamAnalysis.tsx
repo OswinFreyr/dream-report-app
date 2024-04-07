@@ -11,12 +11,12 @@ import {
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useIsFocused } from "@react-navigation/native";
 
-
 export default function DreamAnalysis() {
   const [apiResponse, setApiResponse] = useState(null);
   const [dreams, setDreams] = useState([]);
   const [filteredDreams, setFilteredDreams] = useState([]);
   const [searchText, setSearchText] = useState("");
+  const [showAllDreams, setShowAllDreams] = useState(false);
 
   const isFocused = useIsFocused();
 
@@ -38,12 +38,10 @@ export default function DreamAnalysis() {
       }
     };
 
-    if(isFocused){
+    if (isFocused) {
       fetchDreamsFromStorage();
     }
-
   }, [isFocused]);
-
 
   useEffect(() => {
     setFilteredDreams(
@@ -84,11 +82,16 @@ export default function DreamAnalysis() {
     }
   };
 
-  const renderItem = ({ item, index }) => (
-    <TouchableOpacity onPress={() => handleDreamSelection(index)}>
-      <Text style={styles.item}>{item.dreamTitle}</Text>
-    </TouchableOpacity>
-  );
+  const renderItem = ({ item, index }) => {
+    if (!showAllDreams && index >= 4) return null;
+    const descIndex = filteredDreams.length - index - 1;
+    const dream = filteredDreams[descIndex];
+    return (
+      <TouchableOpacity onPress={() => handleDreamSelection(descIndex)}>
+        <Text style={styles.item}>{dream.dreamTitle}</Text>
+      </TouchableOpacity>
+    );
+  };
 
   const renderTable = () => {
     if (!apiResponse) {
@@ -98,31 +101,31 @@ export default function DreamAnalysis() {
     const entitiesList = apiResponse.entity_list;
     const entryList = [...conceptsList, ...entitiesList];
     return (
-      <ScrollView style={styles.scrollView}>
-        <Text style={{ marginBottom: 10 }}>Analyse de votre rêve :</Text>
-        <View style={{ flexDirection: "row", marginBottom: 5 }}>
-          <Text style={styles.tableHeader}>Entry Type</Text>
-          <Text style={styles.tableHeader}>Relevance</Text>
-          <Text style={styles.tableHeader}>Term</Text>
-          <Text style={styles.tableHeader}>Semantic Type</Text>
+      <View style={styles.scrollView}>
+        <Text style={styles.analysisHeader}>Analyse de votre rêve :</Text>
+        <View style={styles.tableHeaderContainer}>
+          <Text style={styles.tableHeader}>Type</Text>
+          <Text style={styles.tableHeader}>Pertinence</Text>
+          <Text style={styles.tableHeader}>Terme</Text>
+          <Text style={styles.tableHeader}>Type sémantique</Text>
         </View>
         {entryList.map((entry, index) => (
-          <View key={index} style={{ flexDirection: "row", marginBottom: 5 }}>
+          <View key={index} style={styles.tableRow}>
             <Text style={styles.tableCell}>{entry.type}</Text>
             <Text style={styles.tableCell}>{entry.relevance}</Text>
             <Text style={styles.tableCell}>{entry.form}</Text>
             <Text style={styles.tableCell}>{entry.sementity?.type}</Text>
           </View>
         ))}
-      </ScrollView>
+      </View>
     );
   };
 
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       <TextInput
         style={styles.searchInput}
-        placeholder="Rechercher un rêve "
+        placeholder="Rechercher un rêve"
         onChangeText={handleSearch}
         value={searchText}
       />
@@ -131,15 +134,19 @@ export default function DreamAnalysis() {
         renderItem={renderItem}
         keyExtractor={(item, index) => index.toString()}
       />
+      {!showAllDreams && filteredDreams.length > 4 && (
+        <TouchableOpacity onPress={() => setShowAllDreams(true)}>
+          <Text style={styles.showMoreButton}>Voir plus</Text>
+        </TouchableOpacity>
+      )}
       {apiResponse && <View style={{ marginTop: 40 }}>{renderTable()}</View>}
-    </View>
+    </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 20,
     backgroundColor: "#fff",
   },
   searchInput: {
@@ -149,7 +156,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     paddingHorizontal: 10,
     marginBottom: 20,
-    color : "grey"
+    color: "grey",
   },
   item: {
     padding: 10,
@@ -157,16 +164,37 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderBottomColor: "#ccc",
   },
+  scrollView: {
+    maxHeight: 200,
+  },
+  analysisHeader: {
+    marginBottom: 10,
+    fontSize: 20,
+    fontWeight: "bold",
+  },
+  tableHeaderContainer: {
+    flexDirection: "row",
+    marginBottom: 5,
+  },
   tableHeader: {
     flex: 1,
     fontWeight: "bold",
     marginRight: 5,
+    textAlign: "center",
+  },
+  tableRow: {
+    flexDirection: "row",
+    marginBottom: 5,
   },
   tableCell: {
     flex: 1,
     marginRight: 5,
+    textAlign: "center",
   },
-  scrollView: {
-    maxHeight: 200,
+  showMoreButton: {
+    marginTop: 10,
+    textAlign: "center",
+    color: "blue",
+    textDecorationLine: "underline",
   },
 });
