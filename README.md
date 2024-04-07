@@ -5,7 +5,7 @@ Rêvélations is an application to store your dreams and analyze them thanks to 
 # Table of contents
 [Teck Stack](#Teck%20Stack)  
 [Installation](#Installation)  
-[Structure](#Structure)
+[Structure](#Structure)  
 [Functionalities](#Functionalities)
 
 # Teck Stack
