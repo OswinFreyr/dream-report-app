@@ -38,6 +38,10 @@ export default function SingleDatePicker({ setDate, date }) {
   const onConfirmSingle = useCallback(
     (params) => {
       setOpen(false);
+      const year = params.date.getFullYear();
+      const month = params.date.getMonth() + 1;
+      const day = params.date.getDate();
+      params.date = year + "-" + month + "-" + day
       setDate(params.date);
     },
     [setOpen, setDate]
@@ -54,7 +58,7 @@ export default function SingleDatePicker({ setDate, date }) {
         >
           Choisir une date *
         </Button>
-        {date && <Text style={{ color: "black" }}> {date.toDateString()}</Text>}
+        {date && <Text style={{ color: "black" }}> {date}</Text>}
         <DatePickerModal
           locale="fr"
           mode="single"

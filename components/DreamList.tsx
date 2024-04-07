@@ -28,6 +28,25 @@ export default function DreamList() {
         console.error("Error fetching dream data from AsyncStorage:", error);
       }
     };
+    AsyncStorage.clear();
+    fetchDreamsFromStorage()
+  }, [])
+
+  useEffect(() => {
+    const fetchDreamsFromStorage = async () => {
+      try {
+        const dreamFormDataArray = await AsyncStorage.getItem("dreamFormDataArray");
+        if (dreamFormDataArray) {
+          const formDataArray = JSON.parse(dreamFormDataArray);
+          setDreams(formDataArray);
+          setFilteredDreams(formDataArray);
+        } else {
+          console.error("No dream data found in AsyncStorage.");
+        }
+      } catch (error) {
+        console.error("Error fetching dream data from AsyncStorage:", error);
+      }
+    };
 
     if(isFocused){
       fetchDreamsFromStorage();
