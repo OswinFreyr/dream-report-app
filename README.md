@@ -38,7 +38,7 @@ To start use the command `npx expo` at the root of your project and then follow 
 # Structure
 The application is a single-page application and is composed of 5 tabs.
 #### Index
-The home page is the form where you write your dreams (title of your dream, main content and date of the dream) and add if needed if the dream was lucid and some informations with the different lists. When sent your dream is stored in the async storage of your device. For now, the selected infos in the lists are not resetted, this will be adressed in a future update.  
+The home page is the form where you write your dreams (title of your dream, main content and date of the dream) and add if needed if the dream was lucid and some informations with the different lists. When sent your dream is stored in the async storage of your device. For now, the selected infos in the lists are not resetted on submit and the date can't be modified once selected and approved, this will be adressed in a future update.  
   
 ![index tab](image.png)  
 ![index tab with input filled](image-1.png)
