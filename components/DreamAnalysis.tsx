@@ -79,6 +79,7 @@ export default function DreamAnalysis() {
       };
       const response = await fetch(apiUrl, requestOptions);
       const responseData = await response.json();
+      console.log(responseData);
       setApiResponse(responseData);
     } catch (error) {
       console.error("Erreur requête vers MeaningCloud API:", error);
@@ -117,17 +118,17 @@ export default function DreamAnalysis() {
       <View>
         <Text style={styles.analysisHeader}>Analyse de votre rêve :</Text>
         <View style={styles.tableHeaderContainer}>
-          <Text style={styles.tableHeader}>Type</Text>
           <Text style={styles.tableHeader}>Pertinence</Text>
           <Text style={styles.tableHeader}>Terme</Text>
-          <Text style={styles.tableHeader}>Type sémantique</Text>
+          <Text style={styles.tableHeader}>Type</Text>
         </View>
         {entryList.map((entry, index) => (
           <View key={index} style={styles.tableRow}>
-            <Text style={styles.tableCell}>{entry.type}</Text>
             <Text style={styles.tableCell}>{entry.relevance}</Text>
             <Text style={styles.tableCell}>{entry.form}</Text>
-            <Text style={styles.tableCell}>{entry.sementity?.type}</Text>
+            <Text style={styles.tableCell}>
+              {entry.sementity?.type && entry.sementity.type.split('>')[1]}
+            </Text>
           </View>
         ))}
       </View>
@@ -207,6 +208,8 @@ const styles = StyleSheet.create({
     flex: 1,
     marginRight: 5,
     textAlign: "center",
+    borderBottomWidth: 1,
+    borderBottomColor: "#ccc",
   },
   showMoreButton: {
     marginTop: 10,
