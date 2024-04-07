@@ -51,11 +51,8 @@ export default function DreamAnalysis() {
         dream.dreamTitle.toLowerCase().includes(searchText.toLowerCase())
       )
     );
-  }, [dreams, searchText]);
-
-  useEffect(() => {
     setShowMoreButton(filteredDreams.length > 4);
-  }, [filteredDreams]);
+  }, [dreams, searchText]);
 
   const handleSearch = (text) => {
     setSearchText(text);
@@ -90,6 +87,7 @@ export default function DreamAnalysis() {
 
   const handleShowLess = () => {
     setShowAllDreams(false);
+    setShowMoreButton(filteredDreams.length > 4);
   };
 
   const handleShowMore = () => {
@@ -149,7 +147,7 @@ export default function DreamAnalysis() {
         renderItem={renderItem}
         keyExtractor={(item, index) => index.toString()}
       />
-      {showMoreButton && !showAllDreams && (
+      {showMoreButton && !showAllDreams && filteredDreams.length > 4 && (
         <TouchableOpacity onPress={handleShowMore}>
           <Text style={styles.showMoreButton}>Afficher plus</Text>
         </TouchableOpacity>
@@ -220,4 +218,5 @@ const styles = StyleSheet.create({
     color: "black", 
     fontWeight: "bold", 
   },
+  
 });
