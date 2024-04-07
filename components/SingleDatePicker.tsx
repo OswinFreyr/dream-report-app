@@ -4,23 +4,25 @@ import { Button } from "react-native-paper";
 import { DatePickerModal } from "react-native-paper-dates";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import fr from "react-native-paper-dates/src/translations/fr";
+import { Snackbar } from "react-native-paper";
+
 
 import { registerTranslation } from "react-native-paper-dates";
 
 export default function SingleDatePicker({ setDate, date }) {
   registerTranslation("fr", {
     save: "Sauvegarder",
-    selectSingle: "Selectionner une date",
-    selectMultiple: "Selectionner plusieurs dates",
-    selectRange: "Selectionner une periode",
+    selectSingle: "Sélectionner une date",
+    selectMultiple: "Sélectionner plusieurs dates",
+    selectRange: "Sélectionner une période",
     notAccordingToDateFormat: (inputFormat) =>
       `Le format de la date doit être ${inputFormat}`,
     mustBeHigherThan: (date) => `Doit être après ${date}`,
     mustBeLowerThan: (date) => `Doit être avant ${date}`,
     mustBeBetween: (startDate, endDate) =>
       `Doit être entre ${startDate} - ${endDate}`,
-    dateIsDisabled: "Ce jour n'est pas autorise",
-    previous: "Precedent·e",
+    dateIsDisabled: "Ce jour n'est pas autorisé",
+    previous: "Précédent·e",
     next: "Suivant·e",
     typeInDate: "Saisir une date",
     pickDateFromCalendar: "Choisir une date à partir du calendrier",
@@ -30,19 +32,34 @@ export default function SingleDatePicker({ setDate, date }) {
   });
 
   const [open, setOpen] = useState(false);
+  const [snackbarVisible, setSnackbarVisible] = useState(false);
 
   const onDismissSingle = useCallback(() => {
     setOpen(false);
   }, [setOpen]);
 
+  const onDismissSnackbar = () => {
+    setSnackbarVisible(false);
+  };
+
   const onConfirmSingle = useCallback(
     (params) => {
       setOpen(false);
-      const year = params.date.getFullYear();
-      const month = params.date.getMonth() + 1;
-      const day = params.date.getDate();
-      params.date = year + "-" + month + "-" + day;
-      setDate(params.date);
+      const selectedDate = params.date;
+      const currentDate = new Date();
+      if (selectedDate <= currentDate) {
+        const year = selectedDate.getFullYear();
+        const month = selectedDate.getMonth() + 1;
+        const day = selectedDate.getDate();
+        const formattedDate = `${year}-${month}-${day}`;
+        setDate(formattedDate);
+      } else {
+        // Afficher la Snackbar si la date est ultérieure à aujourd'hui
+        setSnackbarVisible(true);
+        setTimeout(() => {
+          setSnackbarVisible(false);
+        }, 3000);
+      }
     },
     [setOpen, setDate]
   );
@@ -73,7 +90,15 @@ export default function SingleDatePicker({ setDate, date }) {
           date={date}
           onConfirm={onConfirmSingle}
           presentationStyle="pageSheet"
+          minDate={new Date()}
         />
+        <Snackbar
+          visible={snackbarVisible}
+          onDismiss={onDismissSnackbar}
+          duration={Snackbar.DURATION_SHORT}
+        >
+          La date doit être antérieure ou égale à aujourd'hui.
+        </Snackbar>
       </View>
     </SafeAreaProvider>
   );
