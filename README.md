@@ -30,7 +30,8 @@ The commmabd `npx expo install @react-native-async-storage/async-storage` is use
 - Clone this repository on your device
 - Launch your terminal at the root of the project
 - Execute the command `npm install`
-You can now add your code to the project !
+- create a .env file at your project root with the variables `EXPO_PUBLIC_API_URL=htttps://yourapiurl`, for [Meaning Cloud](https://api.meaningcloud.com/topics-2.0), and `EXPO_PUBLIC_API_KEY=yourApiKey`
+You cannow add your code to the project !
 
 ### Starting the project
 To start use the command `npx expo` at the root of your project and then follow the informations listed in your terminal.
