@@ -171,7 +171,7 @@ const styles = StyleSheet.create({
   searchInput: {
     height: 40,
     borderBottomWidth: 1,
-    borderColor: "#ccc",
+    borderColor: "#ab9ccf",
     paddingHorizontal: 10,
     marginBottom: 20,
     color: "grey",
@@ -180,7 +180,7 @@ const styles = StyleSheet.create({
     padding: 10,
     fontSize: 18,
     borderBottomWidth: 1,
-    borderBottomColor: "#ccc",
+    borderBottomColor: "#ab9ccf",
   },
   scrollView: {
     maxHeight: 200,
@@ -212,7 +212,7 @@ const styles = StyleSheet.create({
     borderBottomColor: "#ccc",
   },
   showMoreButton: {
-    marginTop: 10,
+    marginTop: 30,
     marginBottom: 20,
     paddingVertical: 10,
     backgroundColor: "#d0bcff",
