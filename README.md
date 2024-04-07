@@ -62,3 +62,6 @@ The parameters tab si where you can add some informations to the lists of people
 
 # Functionalities
 
+The Home tab has an additional tab on the question mark icon to present the app and it's functionnalities.  
+The tab Astuces contains different astuces that appears in a random order when the tab is visited.  
+The tab Parameters contains a form to add extra information that then appears on the main page in the selected category. It also have a button to clear all the async storage.  
