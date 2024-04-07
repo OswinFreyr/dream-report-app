@@ -18,6 +18,9 @@ export default function DreamAnalysis() {
   const [searchText, setSearchText] = useState("");
   const [showAllDreams, setShowAllDreams] = useState(false);
   const [showMoreButton, setShowMoreButton] = useState(false);
+  const [tabInfosPeople, setTabInfosPeople] = useState([]);
+  const [tabInfosThemes, setTabInfosThemes] = useState([]);
+  const [tabInfosFeelings, setTabInfosFeelings] = useState([]);
 
   const isFocused = useIsFocused();
 
@@ -29,6 +32,7 @@ export default function DreamAnalysis() {
         );
         if (dreamFormDataArray) {
           const formDataArray = JSON.parse(dreamFormDataArray);
+          console.log(formDataArray);
           setDreams(formDataArray);
           setFilteredDreams(formDataArray);
           setShowMoreButton(formDataArray.length > 4);
@@ -62,6 +66,18 @@ export default function DreamAnalysis() {
   const handleDreamSelection = (index) => {
     const selectedDream = filteredDreams[index];
     handleApiRequest(selectedDream.dreamText);
+    const peopleContent = selectedDream.tabInfosPeople.map(
+      (person) => person.content
+    );
+    const themesContent = selectedDream.tabInfosThemes.map(
+      (theme) => theme.content
+    );
+    const feelingsContent = selectedDream.tabInfosFeelings.map(
+      (feeling) => feeling.content
+    );
+    setTabInfosPeople(peopleContent);
+    setTabInfosThemes(themesContent);
+    setTabInfosFeelings(feelingsContent);
   };
 
   const handleApiRequest = async (dreamText) => {
@@ -131,9 +147,40 @@ export default function DreamAnalysis() {
             </Text>
           </View>
         ))}
+  
+        <Text style={styles.analysisHeader}>
+          Analyse des infos supplémentaires :
+        </Text>
+        <View style={styles.tableHeaderContainer}>
+          <Text style={styles.tableHeader}>Personnes</Text>
+          <Text style={styles.tableHeader}>Thèmes</Text>
+          <Text style={styles.tableHeader}>Émotions</Text>
+        </View>
+        {tabInfosPeople.map((person, index) => (
+          <View key={index} style={styles.tableRow}>
+            <Text style={styles.tableCell}>{person}</Text>
+            <Text style={styles.tableCell}></Text>
+            <Text style={styles.tableCell}></Text>
+          </View>
+        ))}
+        {tabInfosThemes.map((theme, index) => (
+          <View key={index} style={styles.tableRow}>
+            <Text style={styles.tableCell}></Text>
+            <Text style={styles.tableCell}>{theme}</Text>
+            <Text style={styles.tableCell}></Text>
+          </View>
+        ))}
+        {tabInfosFeelings.map((feeling, index) => (
+          <View key={index} style={styles.tableRow}>
+            <Text style={styles.tableCell}></Text>
+            <Text style={styles.tableCell}></Text>
+            <Text style={styles.tableCell}>{feeling}</Text>
+          </View>
+        ))}
       </View>
     );
   };
+  
 
   return (
     <ScrollView style={styles.container}>
