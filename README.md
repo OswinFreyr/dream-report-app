@@ -37,18 +37,22 @@ To start use the command `npx expo` at the root of your project and then follow 
 
 # Structure
 The application is a single-page application and is composed of 5 tabs.
-#### index
+#### Index
 The home page is the form where you write your dreams (title of your dream, main content and date of the dream) and add if needed if the dream was lucid and some informations with the different lists. When sent your dream is stored in the async storage of your device. For now, the selected infos in the lists are not resetted, this will be adressed in a future update.
 
-#### history
+#### History
 The history page let you see all your dreams and informations you added to them. You can search by the dream titles with the search bar.
 In a future update you will be able to mark some dreams as favorite to find them more easily.
 
-#### analyze
+#### Analyze
 The analyze tab is where the request to the meaningcloud API is done, by selecting a dream title, you can see all the cemantic analysis done by the API. You can also search by the dream titles with the search bar.  
 In a future update, both history and analyze tabs will only be one.
 
-#### parameters
+#### Astuces 
+The astuces tab is where you can find all sorts of tips and advices on your sleep and dreams.
+
+#### Parameters
 The parameters tab si where you can add some informations to the lists of people, themes and emotions to add precision to the cemantic analysis. In a future update, you will be able to modify/delete some and a night theme switch will be added.
 
 # Functionalities
+
