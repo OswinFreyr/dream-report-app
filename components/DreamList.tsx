@@ -22,7 +22,7 @@ export default function DreamList() {
           setDreams(formDataArray);
           setFilteredDreams(formDataArray);
         } else {
-          console.error("No dream data found in AsyncStorage.");
+          // console.error("No dream data found in AsyncStorage.");
         }
       } catch (error) {
         console.error("Error fetching dream data from AsyncStorage:", error);
@@ -41,7 +41,7 @@ export default function DreamList() {
           setDreams(formDataArray);
           setFilteredDreams(formDataArray);
         } else {
-          console.error("No dream data found in AsyncStorage.");
+          // console.error("No dream data found in AsyncStorage.");
         }
       } catch (error) {
         console.error("Error fetching dream data from AsyncStorage:", error);
