@@ -54,7 +54,7 @@ In a future update, both history and analyze tabs will only be one.
 
 #### Astuces 
 The astuces tab is where you can find all sorts of tips and advices on your sleep and dreams.  
-
+![astuces tab with one tip presented](image-5.png)
 
 #### Parameters
 The parameters tab si where you can add some informations to the lists of people, themes and emotions to add precision to the cemantic analysis. In a future update, you will be able to modify/delete some and a night theme switch will be added.  
