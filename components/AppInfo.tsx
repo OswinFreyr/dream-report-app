@@ -23,6 +23,12 @@ export default function AppInfo({ path }: { path: string }) {
         </Text>
 
         <Text
+          style={styles.titleText}
+          lightColor="rgba(0,0,0,0.8)"
+          darkColor="rgba(255,255,255,0.8)">
+          Sauvegarder un rêve
+        </Text>
+        <Text
           style={styles.infosText}
           lightColor="rgba(0,0,0,0.8)"
           darkColor="rgba(255,255,255,0.8)">
@@ -31,12 +37,24 @@ export default function AppInfo({ path }: { path: string }) {
         </Text>
 
         <Text
+          style={styles.titleText}
+          lightColor="rgba(0,0,0,0.8)"
+          darkColor="rgba(255,255,255,0.8)">
+          Quelques astuces : 
+        </Text>
+        <Text
           style={styles.infosText}
           lightColor="rgba(0,0,0,0.8)"
           darkColor="rgba(255,255,255,0.8)">
           Si vous êtes à la recherche d'astuces sur vos rêves ou votre sommeil, rendez-vous dans l'onglet Astuces.
         </Text>
 
+        <Text
+          style={styles.titleText}
+          lightColor="rgba(0,0,0,0.8)"
+          darkColor="rgba(255,255,255,0.8)">
+          Retrouver son rêve : 
+        </Text>
         <Text
           style={styles.infosText}
           lightColor="rgba(0,0,0,0.8)"
@@ -45,12 +63,24 @@ export default function AppInfo({ path }: { path: string }) {
         </Text>
 
         <Text
+          style={styles.titleText}
+          lightColor="rgba(0,0,0,0.8)"
+          darkColor="rgba(255,255,255,0.8)">
+          Décortiquer son rêve
+        </Text>
+        <Text
           style={styles.infosText}
           lightColor="rgba(0,0,0,0.8)"
           darkColor="rgba(255,255,255,0.8)">
-          Analysez vos rêves dans l'onglet Analyse, recherchez les par leur titre.
+          Besoin de mieux comprendre son rêve ? Analysez vos rêves dans l'onglet Analyse et voyez les différentes informations qui en ressortent. Recherchez les par leur titre pour en trouvez des spécifiques.
         </Text>
 
+        <Text
+          style={styles.titleText}
+          lightColor="rgba(0,0,0,0.8)"
+          darkColor="rgba(255,255,255,0.8)">
+          Ajout d'informations : 
+        </Text>
         <Text
           style={styles.infosText}
           lightColor="rgba(0,0,0,0.8)"
@@ -58,6 +88,12 @@ export default function AppInfo({ path }: { path: string }) {
           Ajoutez des personnes, thèmes et émotions grâce à l'onglet Paramètres.
         </Text>
 
+        <Text
+          style={styles.titleText}
+          lightColor="rgba(0,0,0,0.8)"
+          darkColor="rgba(255,255,255,0.8)">
+          Pourquoi Rêvélations vous est utile : 
+        </Text>
         <Text
           style={styles.infosText}
           lightColor="rgba(0,0,0,0.8)"
@@ -94,7 +130,19 @@ const styles = StyleSheet.create({
     textAlign: 'justify',
     paddingRight: 20,
     paddingLeft: 20,
-    paddingBottom: 10,
+    paddingBottom: 20,
     paddingTop: -5,
+  },
+  titleText: {
+    fontSize: 17,
+    fontWeight: '600',
+    lineHeight: 24,
+    textAlign: 'left',
+    paddingRight: 20,
+    paddingLeft: 20,
+    paddingBottom: 3,
+    textDecorationStyle: 'solid',
+    textDecorationLine: 'underline',
+
   },
 });
