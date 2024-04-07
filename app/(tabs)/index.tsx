@@ -8,7 +8,7 @@ export default function TabOneScreen() {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Rêvélations : Le Journal Onirique</Text>
-      <Text style={styles.title}>Enregistrer son rêve</Text>
+      {/* <Text style={styles.title}>Enregistrer son rêve</Text> */}
       <View
         style={styles.separator}
         lightColor="#eee"

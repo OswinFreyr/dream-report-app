@@ -97,7 +97,7 @@ export default function Parameters() {
       <View style={styles.buttonContainer}>
         <Button mode="contained" onPress={handleClearAsyncStorage}>
           {" "}
-          Vider Async Storage
+          Supprimer tous les rêves
         </Button>
       </View>
       <Portal>
@@ -105,9 +105,13 @@ export default function Parameters() {
           visible={dialogVisible}
           onDismiss={() => setDialogVisible(false)}
         >
-          <Dialog.Title>AsyncStorage vidé</Dialog.Title>
+          <Dialog.Title>Rêves supprimés</Dialog.Title>
           <Dialog.Content>
-            <Text>L'AsyncStorage a été vidé avec succès.</Text>
+            <Text style={{color : "white"}}>
+              Vous avez supprimé non seulement les rêves enregistrés, mais aussi
+              vos espoirs et aspirations. Vous n'aurez plus que le réveil comme
+              compagnon de voyage vers la réalité. Bonne chance !
+            </Text>
           </Dialog.Content>
           <Dialog.Actions>
             <Button onPress={() => setDialogVisible(false)}>OK</Button>
