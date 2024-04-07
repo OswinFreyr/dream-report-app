@@ -47,6 +47,20 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
+        name="history"
+        options={{
+          title: "Historique",
+          tabBarIcon: ({ color }) => <TabBarIcon name="list" color={color} />,
+        }}
+      />
+      <Tabs.Screen
+          name="analyse"
+          options={{
+            title: "Analyse",
+            tabBarIcon: ({ color }) => <TabBarIcon name="eye" color={color} />,
+          }}
+      />
+      <Tabs.Screen
         name="astuces"
         options={{
           title: "Astuces",
@@ -56,24 +70,10 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name="history"
-        options={{
-          title: "Historique",
-          tabBarIcon: ({ color }) => <TabBarIcon name="list" color={color} />,
-        }}
-      />
-      <Tabs.Screen
         name="parameters"
         options={{
           title: "Paramètres",
           tabBarIcon: ({ color }) => <TabBarIcon name="gear" color={color} />,
-        }}
-      />
-      <Tabs.Screen
-        name="analyse"
-        options={{
-          title: "Analyse",
-          tabBarIcon: ({ color }) => <TabBarIcon name="eye" color={color} />,
         }}
       />
     </Tabs>
